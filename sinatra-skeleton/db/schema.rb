@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160127191448) do
+ActiveRecord::Schema.define(version: 20160127210213) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "post_id"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20160127191448) do
     t.boolean  "status",     default: true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "password"
   end
 
   add_index "users", ["group_id"], name: "index_users_on_group_id"
