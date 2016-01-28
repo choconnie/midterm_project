@@ -60,3 +60,24 @@ get '/services' do
  erb :'/services/index'
 end
 
+
+# Go to Profile
+get '/user/profile' do
+	erb :'/user/profile'
+end
+
+post '/profile' do
+	erb :'/user/profile'
+end
+
+
+
+
+
+
+
+
+
+
+
+
