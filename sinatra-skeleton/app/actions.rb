@@ -71,9 +71,19 @@ get '/user/:id/profile' do
 	erb :'/user/profile'
 end
 
-post '/profile' do
-	erb :'/user/profile'
 end
+ 
+post '/profile/:id' do
+	username = params[:username]
+	password = params[:password]
+	user = current_user
+ user.update_attributes(username: username, password: password)
+  redirect "/user/#{user.id}/dashboard"
+end
+
+# post '/profile' do
+# 	erb :'/user/profile'
+# end
 
 get '/admin' do
 	@total_users = User.all.count
