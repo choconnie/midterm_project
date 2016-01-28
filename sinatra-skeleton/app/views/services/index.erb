@@ -1,1 +1,15 @@
-<h1>This is where the service list is going to go!</h1>
+<h2>Services</h2>
+
+<% @services.each do |each_service| %>
+  <div class="service">
+
+    <h3>
+      <a href="/services/<%= each_service.id%>/details"><%= each_service.title %></a>
+    </h3>
+
+    <p>Service id: <%= each_service.id %></p>
+    
+  </div>
+<% end %>
+
+<a href="/">Back to home</a>
