@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128153735) do
+ActiveRecord::Schema.define(version: 20160128200528) do
+
+  create_table "announcements", force: :cascade do |t|
+    t.string   "title"
+    t.string   "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "comments", force: :cascade do |t|
     t.integer  "post_id"
@@ -75,6 +82,7 @@ ActiveRecord::Schema.define(version: 20160128153735) do
     t.boolean  "status",     default: true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "admin",      default: false
   end
 
 end

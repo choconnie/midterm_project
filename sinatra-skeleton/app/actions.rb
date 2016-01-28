@@ -25,6 +25,7 @@ post '/user/login' do
 end
 
 get '/user/:id/dashboard' do
+	@announcement = Announcement.last
 	@user = current_user
 	@memberships = Membership.where(user_id: @user.id)
 	@events = Event.all.limit(3)
@@ -65,8 +66,6 @@ get '/services' do
  erb :'/services/index'
 end
 
-
-# Go to Profile
 get '/user/:id/profile' do
 	@user = current_user
 	erb :'/user/profile'
@@ -80,16 +79,29 @@ post '/profile/:id' do
   redirect "/user/#{user.id}/dashboard"
 end
 
+get '/admin' do
+	@total_users = User.all.count
+	erb :'/admin/index'
+end
 
+post '/admin/announcement' do
+	@announcement = Announcement.new(
+		title: params[:title],
+		content: params[:content]
+		)
+	if @announcement.save
+		redirect '/admin'
+	else
+		erb :'/admin/index'
+	end
+end
 
+get '/admin/users' do
+	erb :'/admin/users/index'
+end
 
-
-
-
-
-
-
-
-
+get '/admin/events' do
+	erb :'/admin/events/index'
+end
 
 
