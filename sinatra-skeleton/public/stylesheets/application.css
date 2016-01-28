@@ -3,6 +3,7 @@
 	background-color: #fec057;
 	border-radius: 5px;
 	padding: 1em;
+	margin-bottom: 2em;
 }
 
 .group-message {
@@ -21,4 +22,8 @@
 
 .dashboard {
 	margin: 0 1em;
+}
+
+.twitter-timeline {
+
 }
