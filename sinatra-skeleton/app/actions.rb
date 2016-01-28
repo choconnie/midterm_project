@@ -49,14 +49,33 @@ post '/user/sign_up' do
 end
 
 get '/groups' do
- erb :'/groups/index'
+  @groups = Group.all
+  erb :'/groups/index'
+end
+
+get '/groups/:id/details' do
+	@group = Group.find(params[:id])
+	@posts = Post.where(group_id: @group.id)
+  erb :'/groups/details'
+end
+
+get '/groups/:id/posts/:id/details' do
+	@post = Post.find(params[:id])
+	@comments = Comment.where(post_id: @post.id)
+  erb :'/groups/posts/details'
 end
 
 get '/events' do
- erb :'/events/index'
+  erb :'/events/index'
 end
 
 get '/services' do
- erb :'/services/index'
+	@services = Service.all
+  erb :'/services/index'
+end
+
+get '/services/:id/details' do
+	@service = Service.find(params[:id])
+  erb :'/services/details'
 end
 
