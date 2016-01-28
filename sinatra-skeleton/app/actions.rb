@@ -70,22 +70,20 @@ get '/services' do
  erb :'/services/index'
 end
 
+# Go to Profile
 get '/user/:id/profile' do
 	@user = current_user
-	erb :'/user/profile'
+ 	erb :'/user/profile'
 end
- 
+
+# Edit profile username and password
 post '/profile/:id' do
 	username = params[:username]
 	password = params[:password]
 	user = current_user
- user.update_attributes(username: username, password: password)
+ 	user.update_attributes(username: username, password: password)
   redirect "/user/#{user.id}/dashboard"
 end
-
-# post '/profile' do
-# 	erb :'/user/profile'
-# end
 
 get '/admin' do
 	@total_users = User.all.count
