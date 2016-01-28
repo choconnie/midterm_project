@@ -1,0 +1,15 @@
+.announcements {
+	height: 10em;
+	background-color: #fec057;
+}
+
+.group-message {
+	background-color: #e5f3f6;
+	margin-bottom: 2em;
+	border-radius: 5px;
+	padding: 0.5em 1em;
+}
+
+.event {
+	height: 7em;
+	background-color: #c53e3e;
