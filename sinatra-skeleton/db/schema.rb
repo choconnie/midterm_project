@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20160127191448) do
 
   add_index "posts", ["group_id"], name: "index_posts_on_group_id"
 
-  create_table "servicies", force: :cascade do |t|
+  create_table "services", force: :cascade do |t|
     t.string   "title"
     t.string   "content"
     t.string   "email"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 20160127191448) do
   create_table "users", force: :cascade do |t|
     t.integer  "group_id"
     t.string   "username"
+    t.string   "password"
     t.string   "email"
     t.boolean  "status",     default: true
     t.datetime "created_at"
