@@ -1,8 +1,11 @@
 <div class="dashboard">
 	<div class="row">
 		<div class="col-md-3">
-			<div class="announcements">
-				<p>Hey guys! This is where we're going to put some cool stuff that we want you to know about!</p>
+			<div class="announcement">
+				<h3>Announcements</h3>
+				<h4><%= @announcement.title%></h4>
+				<p><%= @announcement.content%></p>
+				<p><%= @announcement.created_at %>
 			</div>
 			<a class="twitter-timeline" href="https://twitter.com/ISCCanada" data-widget-id="692762832819982336">Tweets by @ISCCanada</a>
 		</div>
