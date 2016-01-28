@@ -1,9 +1,7 @@
 helpers do
-
 	def current_user
 		User.find(session[:user_id]) if session[:user_id]
 	end
-
 end
 
 get '/' do
@@ -20,10 +18,18 @@ post '/user/login' do
 	@user = User.find_by(username: username, password: password)
 	if @user
 		session[:user_id] = @user.id
-		redirect '/'
+		redirect "/user/#{@user.id}/dashboard"
 	else
 		erb :'/user/login'
 	end
+end
+
+get '/user/:id/dashboard' do
+	@announcement = Announcement.last
+	@user = current_user
+	@memberships = Membership.where(user_id: @user.id)
+	@events = Event.all.limit(3)
+	erb :'/user/dashboard'
 end
 
 get '/user/sign_out' do
@@ -79,3 +85,48 @@ get '/services/:id/details' do
   erb :'/services/details'
 end
 
+# Go to Profile
+get '/user/:id/profile' do
+	@user = current_user
+ 	erb :'/user/profile'
+end
+
+# Go to profile
+post '/profile' do
+	erb :'/user/profile'
+end
+ 
+# Edit profile username and password
+post '/profile/:id' do
+	username = params[:username]
+	password = params[:password]
+	user = current_user
+ 	user.update_attributes(username: username, password: password)
+  redirect "/user/#{user.id}/dashboard"
+end
+
+get '/admin' do
+	@total_users = User.all.count
+	erb :'/admin/index'
+end
+
+post '/admin/announcement' do
+	@announcement = Announcement.new(
+		title: params[:title],
+		content: params[:content]
+		)
+	if @announcement.save
+		redirect '/admin'
+	else
+		erb :'/admin/index'
+	end
+end
+
+get '/admin/users' do
+	@users = User.all
+	erb :'/admin/users/index'
+end
+
+get '/admin/events' do
+	erb :'/admin/events/index'
+end

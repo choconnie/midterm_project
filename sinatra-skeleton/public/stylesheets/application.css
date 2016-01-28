@@ -1,0 +1,28 @@
+.announcement {
+	background-color: #fec057;
+	border-radius: 5px;
+	padding: 1em;
+	margin-bottom: 2em;
+}
+
+.group-message {
+	background-color: #e5f3f6;
+	margin-bottom: 2em;
+	border-radius: 5px;
+	padding: 0.5em 1em;
+}
+
+.event {
+	background-color: #c53e3e;
+	border-radius: 5px;
+	margin-bottom: 1em;
+	padding: 1em;
+}
+
+.dashboard {
+	margin: 0 1em;
+}
+
+.announcement_form input{
+	margin: 1em 0;
+}
