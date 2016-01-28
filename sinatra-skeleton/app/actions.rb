@@ -25,6 +25,7 @@ post '/user/login' do
 end
 
 get '/user/:id/dashboard' do
+	@announcement = Announcement.last
 	@user = current_user
 	@memberships = Membership.where(user_id: @user.id)
 	@events = Event.all.limit(3)
