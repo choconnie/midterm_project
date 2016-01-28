@@ -1,0 +1,35 @@
+<div class="dashboard">
+	<div class="row">
+		<div class="col-md-3">
+			<div class="announcements">
+				<p>Hey guys! This is where we're going to put some cool stuff that we want you to know about!</p>
+			</div>
+			<a class="twitter-timeline" href="https://twitter.com/ISCCanada" data-widget-id="692762832819982336">Tweets by @ISCCanada</a>
+		</div>
+		<div class="col-md-5">
+			<% if @memberships.present? %>
+				<% @memberships.each do |membership| %>
+				<div class="group-message">
+					<h3><a href="#"><%= membership.group.group_name %></a></h3>
+					<h4><a href="#"><%= membership.group.posts.last.title %></a></h4>
+					<p><%= membership.group.posts.last.content %></p>
+				</div>
+				<% end %>
+			<% else %>
+				<p>Please join a group if you haven't already!</p>
+			<%end %>
+		</div>
+		<div class="col-md-4">
+			<h3> What's Happening in Toronto </h3>
+			<% @events.each do |event| %>
+				<div class="event">
+					<h4><%= event.title %></h4>
+					<p><%= event.event_date %></p>
+					<p>We need a new column to have event details!</p>
+					<a href="#">See More</a>
+				</div>
+			<% end %>
+			<script></script>
+		</div>
+	</div>
+</div>
