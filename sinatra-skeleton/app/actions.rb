@@ -66,9 +66,10 @@ get '/services' do
  erb :'/services/index'
 end
 
+# Go to Profile
 get '/user/:id/profile' do
 	@user = current_user
-	erb :'/user/profile'
+ 	erb :'/user/profile'
 end
 
 # Go to profile
