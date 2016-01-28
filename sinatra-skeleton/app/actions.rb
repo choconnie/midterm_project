@@ -87,3 +87,7 @@ get '/admin/users' do
 	erb :'/admin/users/index'
 end
 
+get '/admin/events' do
+	erb :'/admin/events/index'
+end
+

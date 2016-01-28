@@ -6,14 +6,11 @@
                 <!-- left, vertical navbar -->
                 <div class="col-md-2 bootstrap-admin-col-left">
                     <ul class="nav navbar-collapse collapse bootstrap-admin-navbar-side">
-                        <li>
-                            <a href="about.html"><i class="glyphicon glyphicon-chevron-right"></i> About</a>
-                        </li>
                         <li class="active">
-                            <a href="dashboard.html"><i class="glyphicon glyphicon-chevron-right"></i> Dashboard</a>
+                            <a href="/admin"><i class="glyphicon glyphicon-chevron-right"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="#"><i class="glyphicon glyphicon-chevron-right"></i>Events</a><!-- calendar.html -->
+                            <a href="/admin/events"><i class="glyphicon glyphicon-chevron-right"></i>Events</a><!-- calendar.html -->
                         </li>
                         <li>
                             <a href="/admin/users"><span class="badge pull-right"><%= @total_users %></span> Users</a>
@@ -38,12 +35,16 @@
                                     <div class="text-muted bootstrap-admin-box-title">Announcements</div>
                                 </div>
                                 <div class="bootstrap-admin-panel-content text-muted" style="padding: 60px 0; text-align: center">
-                                    <p>Create a New Announcement</p>
-                                			<form method="POST" action="/admin/announcement" role="form">
-		                                    <input type="text" name="title" placeholder="Title">
-		                                    <input type="text" name="content" placeholder="Write Announcement Here...">
-		                                    <input type="submit" value="Post">
-                                		</form>
+                                    <div class="row announcement_form">
+	                                    <div class="col-md-6 col-md-offset-3">
+		                                    <p>Create a New Announcement</p>
+		                                			<form method="POST" action="/admin/announcement" role="form" class="form-horizontal">
+				                                    <input type="text" name="title" class="form-control" placeholder="Title">
+				                                    <textarea class="form-control" rows="4" placeholder="Write Announcement Here..." name="content"></textarea>
+				                                    <input type="submit" value="Post" class="btn btn-primary">
+		                                		</form>
+	                                		</div>
+                                		</div>
                                 </div>
                             </div>
                         </div>
