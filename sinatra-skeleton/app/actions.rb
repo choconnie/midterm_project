@@ -72,13 +72,16 @@ get '/user/:id/profile' do
 	erb :'/user/profile'
 end
 
+# Edit Profile and Redirect to dashboard after
 post '/profile/:id' do
 	username = params[:username]
 	password = params[:password]
+	# image    = params[:image]
 	user = current_user
-  user.update_attributes(username: username, password: password)
+  user.update_attributes(username: username, password: password) #image: image
   redirect "/user/#{user.id}/dashboard"
 end
+
 
 
 
