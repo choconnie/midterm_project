@@ -1,14 +1,41 @@
-<form method="POST" action="/user/sign_up" role="form">
+<% if @user && @user.errors.any? %>
+    <div>
+      <strong>There are some issues with your submission:</strong>
+      <ul>
+        <% @user.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-	<label>Email Address</label>
-	<input type="email" name="email">
+<div class="container">
+  <div class="row centered-form">
+    <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+    	<div class="panel panel-default">
+    		<div class="panel-heading">
+	    		<h3 class="panel-title">Sign Up for International Student Connections<small>It's free!</small></h3>
+	 			</div>
+	 			<div class="panel-body">
+	    		<form form method="POST" action="/user/sign_up" role="form">
+	    			
+	    			<div class="form-group">
+	    				<input type="text" name="username" id="username" class="form-control input-sm" placeholder="Username">
+	    			</div>
+	    			
+	    			<div class="form-group">
+	    				<input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+	    			</div>
 
-	<label>Username</label>
-	<input type="text" name="username">
-
-	<label>Password</label>
-	<input type="password" name="password">
-
-	<input type="submit" value="Login!">
-
-</form>
+	    			<div class="form-group">
+	    				<input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+	    			</div>
+	    			
+	    			<input type="submit" value="Register" class="btn btn-info btn-block">
+	    		
+	    		</form>
+	    	</div>
+  		</div>
+	  </div>
+	</div>
+</div>
