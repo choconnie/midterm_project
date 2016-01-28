@@ -93,6 +93,7 @@ post '/admin/announcement' do
 end
 
 get '/admin/users' do
+	@users = User.all
 	erb :'/admin/users/index'
 end
 
