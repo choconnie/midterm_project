@@ -67,13 +67,20 @@ end
 
 
 # Go to Profile
-get '/user/profile' do
+get '/user/:id/profile' do
+	@user = current_user
 	erb :'/user/profile'
 end
 
-post '/profile' do
-	erb :'/user/profile'
+post '/profile/:id' do
+	username = params[:username]
+	password = params[:password]
+	user = current_user
+  user.update_attributes(username: username, password: password)
+  redirect "/user/#{user.id}/dashboard"
 end
+
+
 
 
 
