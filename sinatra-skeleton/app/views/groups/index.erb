@@ -1,1 +1,13 @@
-<h1>This is where the groups list is going to go!</h1>
+<h1>Group List and Details</h1>
+
+<% @groups.each do |group| %>
+  <div class="group">
+
+    <h3>
+      <a href="/groups/<%= group.id%>/details"><%= group.group_name %></a>
+    </h3>
+
+    <p>"<%= group.id %>"</p>
+  
+  </div>
+<% end %>
