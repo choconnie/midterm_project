@@ -15,10 +15,14 @@ end
 post '/user/login' do
 	username = params[:username]
 	password = params[:password]
-	@user = User.find_by(username: username, password: password)
-	if @user
+	@user = User.find_by(username: username)
+	@user.password_check(password)
+	if (@user.password == password) && @user.status == true
 		session[:user_id] = @user.id
 		redirect "/user/#{@user.id}/dashboard"
+	elsif @user
+		@user.status_check
+		erb :'/user/login'
 	else
 		erb :'/user/login'
 	end
@@ -70,8 +74,6 @@ get '/user/:id/profile' do
 	@user = current_user
 	erb :'/user/profile'
 end
-
-end
  
 post '/profile/:id' do
 	username = params[:username]
@@ -100,6 +102,18 @@ post '/admin/announcement' do
 	else
 		erb :'/admin/index'
 	end
+end
+
+post '/admin/users/:id/deactivate' do
+	@user = User.find params[:id]
+	@user.update_attributes(status: false)
+	redirect '/admin/users'
+end
+
+post '/admin/users/:id/activate' do
+	@user = User.find params[:id]
+	@user.update_attributes(status: true)
+	redirect '/admin/users'
 end
 
 get '/admin/users' do

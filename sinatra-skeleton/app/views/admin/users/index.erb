@@ -41,7 +41,15 @@
                                             <h4><%= user.username %></h4>
                                         </div>
                                         <div>
-                                            <a href="#" class="btn btn-info">Deactivate</a>
+                                            <% if user.status == true %>
+                                           <form method="POST" action="/admin/users/<%=user.id%>/deactivate" role="form">
+                                                <input type="submit" value="Deactivate Account">
+                                            </form>
+                                            <% else %>
+                                            <form method="POST" action="/admin/users/<%=user.id%>/activate" role="form">
+                                                <input type="submit" value="Activate Account">
+                                            </form>
+                                            <% end %>
                                         </div>   
                                     </div>
                                 <% end %>
