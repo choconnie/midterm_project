@@ -10,11 +10,11 @@ require 'faker'
 
 
 # Create Admin user
-user = User.create!(
-  username: 'admin',
-  password: '12345678',
-  email: 'admin@usc.ca'
-)
+# user = User.create!(
+#   username: 'admin',
+#   password: '12345678',
+#   email: 'admin@usc.ca'
+# )
 
 ##########################################
 ##  Change this numbers to generate things as much as you want
@@ -39,17 +39,26 @@ NUMBER_OF_USERS.times do
 end
 
 # # Create groups
-NUMBER_OF_USERS.times do
+NUMBER_OF_GROUPS.times do
   Group.create!(
     group_name: Faker::Team.name,
     city:       Faker::Address.city
   )
 end
 
+# # Create memberships
+NUMBER_OF_USERS.times do
+  Membership.create!(
+    user_id: Faker::Number.between(1, NUMBER_OF_USERS),
+    group_id: Faker::Number.between(1, NUMBER_OF_GROUPS)
+  )
+end
+
+
 # # Create posts
 NUMBER_OF_POSTS.times do
   Post.create!(
-    title:    Faker::Hipster.sentence(3),
+    title:    Faker::App.name,
     content:  Faker::Lorem.paragraph,
     group_id: Faker::Number.between(1, NUMBER_OF_GROUPS)
   )
@@ -66,7 +75,7 @@ end
 # # Create services
 NUMBER_OF_SERVICES.times do
   Service.create!(
-    title:   Faker::Commerce.department,
+    title:   Faker::App.name,
     content: Faker::Hipster.sentence(3),
     email:   Faker::Internet.email,
     phone:   Faker::PhoneNumber.cell_phone
@@ -76,7 +85,7 @@ end
 # # Create events
 NUMBER_OF_EVENTS.times do
   Event.create!(
-    title:      Faker::Commerce.department,
+    title:      Faker::App.name,
     event_date: Faker::Date.forward(30),
     location:   Faker::Address.street_address,
     url:        Faker::Internet.url('example.com'),

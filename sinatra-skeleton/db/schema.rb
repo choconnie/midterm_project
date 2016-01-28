@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160127191448) do
+ActiveRecord::Schema.define(version: 20160128153735) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "post_id"
@@ -35,14 +35,19 @@ ActiveRecord::Schema.define(version: 20160127191448) do
   add_index "events", ["post_id"], name: "index_events_on_post_id"
 
   create_table "groups", force: :cascade do |t|
-    t.integer  "user_id"
     t.string   "group_name"
     t.string   "city"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "groups", ["user_id"], name: "index_groups_on_user_id"
+  create_table "memberships", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "group_id"
+  end
+
+  add_index "memberships", ["group_id"], name: "index_memberships_on_group_id"
+  add_index "memberships", ["user_id"], name: "index_memberships_on_user_id"
 
   create_table "posts", force: :cascade do |t|
     t.integer  "group_id"
@@ -64,7 +69,6 @@ ActiveRecord::Schema.define(version: 20160127191448) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer  "group_id"
     t.string   "username"
     t.string   "password"
     t.string   "email"
@@ -72,7 +76,5 @@ ActiveRecord::Schema.define(version: 20160127191448) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "users", ["group_id"], name: "index_users_on_group_id"
 
 end
