@@ -43,11 +43,11 @@
                                         <div>
                                             <% if user.status == true %>
                                            <form method="POST" action="/admin/users/<%=user.id%>/deactivate" role="form">
-                                                <input type="submit" value="Deactivate Account">
+                                                <input type="submit" class="btn btn-danger" value="Deactivate Account">
                                             </form>
                                             <% else %>
                                             <form method="POST" action="/admin/users/<%=user.id%>/activate" role="form">
-                                                <input type="submit" value="Activate Account">
+                                                <input type="submit" class="btn btn-primary" value="Activate Account">
                                             </form>
                                             <% end %>
                                         </div>   
