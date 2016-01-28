@@ -69,3 +69,20 @@ get '/admin' do
 	@total_users = User.all.count
 	erb :'/admin/index'
 end
+
+post '/admin/announcement' do
+	@announcement = Announcement.new(
+		title: params[:title],
+		content: params[:content]
+		)
+	if @announcement.save
+		redirect '/admin'
+	else
+		erb :'/admin/index'
+	end
+end
+
+get '/admin/users' do
+	erb :'/admin/users/index'
+end
+
