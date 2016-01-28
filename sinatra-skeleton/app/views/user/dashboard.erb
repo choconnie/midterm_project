@@ -6,33 +6,26 @@
 			</div>
 		</div>
 		<div class="col-md-5">
+			
+			<% @memberships.each do |membership| %>
 			<div class="group-message">
-				<h3>Group Name</h3><!--<#%= user.memberships or something like that basically loop over all groups they belong to%>-->
-				<h4>Post Name</h4><!--<#%= group.post.last.title %> -->
-				<p>Butcher cold-pressed viral lo-fi etsy man bun. Typewriter YOLO austin pour-over, artisan keytar listicle tattooed. Blog seitan tofu, heirloom cliche letterpress normcore fashion axe messenger bag next level organic. Leggings 3 wolf moon tilde, raw denim umami forage migas tousled bespoke marfa next level helvetica man bun.
-				</p>
+				<h3><%= membership.group.group_name %></h3>
+				<h4><%= membership.group.posts.last.title %></h4>
+				<p><%= membership.group.posts.last.content %></p>
 			</div>
-			<div class="group-message">
-				<h3>Group Name</h3><!--<#%= user.memberships or something like that basically loop over all groups they belong to%>-->
-				<h4>Post Name</h4><!--<#%= group.post.last.title %> -->
-				<p>Butcher cold-pressed viral lo-fi etsy man bun. Typewriter YOLO austin pour-over, artisan keytar listicle tattooed. Blog seitan tofu, heirloom cliche letterpress normcore fashion axe messenger bag next level organic. Leggings 3 wolf moon tilde, raw denim umami forage migas tousled bespoke marfa next level helvetica man bun.
-				</p>
-			</div>
-			<div class="group-message">
-				<h3>Group Name</h3><!--<#%= user.memberships or something like that basically loop over all groups they belong to%>-->
-				<h4>Post Name</h4><!--<#%= group.post.last.title %> -->
-				<p>Butcher cold-pressed viral lo-fi etsy man bun. Typewriter YOLO austin pour-over, artisan keytar listicle tattooed. Blog seitan tofu, heirloom cliche letterpress normcore fashion axe messenger bag next level organic. Leggings 3 wolf moon tilde, raw denim umami forage migas tousled bespoke marfa next level helvetica man bun.
-				</p>
-			</div>
+			<% end %>
 			<p>Please join a group if you haven't already!</p>
 		</div>
 		<div class="col-md-4">
-			<div class="event">
-				<p>Here is where we're going to pull the events happening soonest!</p>
-			</div>
-			<div class="event">
-				<p>Here is where we're going to pull the events happening soonest!</p>
-			</div>
+			<h3> What's Happening in Toronto </h3>
+			<% @events.each do |event| %>
+				<div class="event">
+					<h4><%= event.title %></h4>
+					<p><%= event.event_date %></p>
+					<p>We need a new column to have event details!</p>
+					<a href="#">See More</a>
+				</div>
+			<% end %>
 		</div>
 	</div>
 </div>

@@ -25,7 +25,9 @@ post '/user/login' do
 end
 
 get '/user/:id/dashboard' do
-	current_user
+	@user = current_user
+	@memberships = Membership.where(user_id: @user.id)
+	@events = Event.all.limit(3)
 	erb :'/user/dashboard'
 end
 
