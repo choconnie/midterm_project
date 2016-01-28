@@ -65,3 +65,7 @@ get '/services' do
  erb :'/services/index'
 end
 
+get '/admin' do
+	@total_users = User.all.count
+	erb :'/admin/index'
+end

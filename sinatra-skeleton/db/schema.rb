@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128153735) do
+ActiveRecord::Schema.define(version: 20160128180949) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "post_id"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20160128153735) do
     t.boolean  "status",     default: true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "admin",      default: false
   end
 
 end
