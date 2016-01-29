@@ -39,6 +39,9 @@
 	margin: 1em 0;
 }
 
+.event_form input{
+	margin: 1em 0;
+}
 .errors {
 	text-align: center;
 }

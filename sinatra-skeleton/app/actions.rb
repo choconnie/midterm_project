@@ -141,3 +141,12 @@ end
 get '/admin/events' do
 	erb :'/admin/events/index'
 end
+
+post '/admin/event' do
+	@event = Event.create(
+		title: params[:title],
+		event_date: params[:date],
+		location: params[:location],
+		url: params[:url]
+	)
+end 

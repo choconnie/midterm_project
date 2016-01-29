@@ -32,10 +32,20 @@
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <div class="text-muted bootstrap-admin-box-title">Title of the box</div>
+                                <div class="text-muted bootstrap-admin-box-title">Create an Event Listing</div>
                             </div>
                             <div class="bootstrap-admin-panel-content text-muted" style="padding: 60px 0; text-align: center">
-
+                                <div class="row event_form">
+                                    <div class="col-md-8 col-md-offset-2">
+                                        <form method="POST" action="/admin/event" role="form" class="form-horizontal">
+                                        <input type="text" name="title" class="form-control" placeholder="Title">
+                                        <input type="text" name="date" class="form-control" placeholder="Date of Event">
+                                        <input type="text" name="location" class="form-control" placeholder="Location">
+                                        <input type="text" name="url" class="form-control" placeholder="URL with more information">
+                                        <input type="submit" value="Post" class="btn btn-primary">
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
