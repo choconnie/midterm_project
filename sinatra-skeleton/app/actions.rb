@@ -99,7 +99,7 @@ end
 get '/user/:id/profile' do
 	@user = current_user
 	erb :'/user/profile'
-		# if @user.nil?
+	 # if @user.nil?
 	 #    erb :login
 	 #  else 
 	 #    session[:user_id] = @user.id
@@ -122,23 +122,33 @@ get '/profile' do
   erb :profile
 end
 
-post '/profile' do
-  @user = User.new(params[:user])
-     @user.username.upcase!
-  if @user.save
-    session[:id] = @user.id
-    if params[:file].present?
-      tempfile = params[:file][:tempfile]
-      filename = params[:file][:filename]
-      cp(tempfile.path, "public/uploads_imgs/#{@user.id}")
-      redirect '/profile'
-    else
-      redirect '/profile'
-    end
-  else
-    erb :'/login'
-  end
+# Upload profile image to public folder
+# post '/profile' do
+#   @user = User.new(params[:user])
+#      @user.username.upcase!
+#   if @user.save
+#     session[:id] = @user.id
+#     if params[:file].present?
+#       tempfile = params[:file][:tempfile]
+#       filename = params[:file][:filename]
+#       cp(tempfile.path, "public/uploads_imgs/#{@user.id}")
+#       redirect '/profile'
+#     else
+#       redirect '/profile'
+#     end
+#   else
+#     erb :'/login'
+#   end
+# end
+
+post '/profile/<%= @user.id %>/upload_imgs' do
+  tempfile = params['file'][:tempfile]
+  filename = params['file'][:filename]
+  File.copy(tempfile.path, "public/uploads_imgs/#{@user.id}")
+  redirect '/user/profile'
 end
+
+# End of Profile Actions
 
 get '/admin' do
 	@total_users = User.all.count
