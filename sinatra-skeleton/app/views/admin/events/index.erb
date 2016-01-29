@@ -1,56 +1,72 @@
 <div class="bootstrap-admin-with-small-navbar">
-    <div class="container">
-        <!-- left, vertical navbar & content -->
+  <div class="container">
+    <!-- left, vertical navbar & content -->
+    <div class="row">
+      <!-- left, vertical navbar -->
+      <div class="col-md-2 bootstrap-admin-col-left">
+        <ul class="nav navbar-collapse collapse bootstrap-admin-navbar-side">
+
+          <li>
+            <a href="/admin"><i class="glyphicon glyphicon-chevron-right"></i> Dashboard</a>
+          </li>
+          <li class="active">
+            <a href="/admin/events"><i class="glyphicon glyphicon-chevron-right"></i>Events</a><!-- calendar.html -->
+          </li>
+          <li>
+            <a href="/admin/users"><span class="badge pull-right"><%= @total_users %></span> Users</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- content -->
+      <div class="col-md-10">
         <div class="row">
-            <!-- left, vertical navbar -->
-            <div class="col-md-2 bootstrap-admin-col-left">
-                <ul class="nav navbar-collapse collapse bootstrap-admin-navbar-side">
-                
-                    <li>
-                        <a href="/admin"><i class="glyphicon glyphicon-chevron-right"></i> Dashboard</a>
-                    </li>
-                    <li class="active">
-                        <a href="/admin/evemts"><i class="glyphicon glyphicon-chevron-right"></i>Events</a><!-- calendar.html -->
-                    </li>
-                    <li>
-                        <a href="/admin/users"><span class="badge pull-right"><%= @total_users %></span> Users</a>
-                    </li>
-                </ul>
+          <div class="col-lg-12">
+            <div class="page-header">
+              <h1>Events</h1>
             </div>
-
-            <!-- content -->
-            <div class="col-md-10">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="page-header">
-                            <h1>Events</h1>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <div class="text-muted bootstrap-admin-box-title">Create an Event Listing</div>
-                            </div>
-                            <div class="bootstrap-admin-panel-content text-muted" style="padding: 60px 0; text-align: center">
-                                <div class="row event_form">
-                                    <div class="col-md-8 col-md-offset-2">
-                                        <form method="POST" action="/admin/event" role="form" class="form-horizontal">
-                                        <input type="text" name="title" class="form-control" placeholder="Title">
-                                        <input type="date" name="date" class="form-control" placeholder="Date of Event">
-                                        <input type="text" name="location" class="form-control" placeholder="Location">
-                                        <input type="text" name="url" class="form-control" placeholder="URL with more information">
-                                        <input type="submit" value="Post" class="btn btn-primary">
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-    </div>        
+
+        <div class="row">
+          <div class="col-lg-12">
+            <% if @event && @event.errors.any? %>
+            <div class = "errors">
+              <strong>There are some issues with your submission:</strong>
+              <ul>
+                <% @event.errors.full_messages.each do |error| %>
+                <li><%= error %></li>
+                <% end %>
+              </ul>
+            </div>
+            <% elsif @event && (@success == true) %>
+            <div class="alert alert-success">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <strong>Success!</strong> Indicates a successful or positive action.
+            </div>
+            <% end %>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Create an Event Listing</div>
+              </div>
+              <div class="bootstrap-admin-panel-content text-muted" style="padding: 60px 0; text-align: center">
+                <div class="row event_form">
+                  <div class="col-md-8 col-md-offset-2">
+                    <form method="POST" action="/admin/event" role="form" class="form-horizontal">
+                      <input type="text" name="title" class="form-control" placeholder="Title">
+                      <input type="date" name="date" class="form-control" placeholder="Date of Event">
+                      <input type="text" name="location" class="form-control" placeholder="Location">
+                      <input type="text" name="url" class="form-control" placeholder="URL with more information">
+                      <textarea name="details" class="form-control" placeholder="Event Details Go Here"></textarea>
+                      <input type="submit" value="Post" class="btn btn-primary">
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>        
 </div>

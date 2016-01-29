@@ -3,11 +3,10 @@ helpers do
 	# def logged_in?
  #    current_user != nil 
  #  end
-
+ 
 	def current_user
 		User.find(session[:user_id]) if session[:user_id]
 	end
-
 end
 
 get '/' do
@@ -38,7 +37,7 @@ get '/user/:id/dashboard' do
 	@announcement = Announcement.last
 	@user = current_user
 	@memberships = Membership.where(user_id: @user.id)
-	@events = Event.all.order(:event_date).limit(3)
+	@events = Event.where("event_date >= ?", Date.today).order(:event_date).limit(3)
 	erb :'/user/dashboard'
 end
 
@@ -82,7 +81,13 @@ get '/groups/:id/posts/:id/details' do
 end
 
 get '/events' do
+	@events = Event.where("event_date >= ?", Date.today).order(:event_date)
   erb :'/events/index'
+end
+
+get '/event/:id/details' do
+	@event = Event.find params[:id]
+	erb :'/events/details/index'
 end
 
 get '/services' do
@@ -95,16 +100,10 @@ get '/services/:id/details' do
   erb :'/services/details'
 end
 
-# Go to profile
+# Go to Profile
 get '/user/:id/profile' do
 	@user = current_user
-	erb :'/user/profile'
-	 # if @user.nil?
-	 #    erb :login
-	 #  else 
-	 #    session[:user_id] = @user.id
-	 #    redirect "/user/#{user.id}/profile"
-	 #  end
+ 	erb :'/user/profile'
 end
 
 # Edit profile username and password
@@ -161,10 +160,9 @@ post '/admin/announcement' do
 		content: params[:content]
 		)
 	if @announcement.save
-		redirect '/admin'
-	else
-		erb :'/admin/index'
+		@success = true
 	end
+	erb :'/admin/index'
 end
 
 post '/admin/users/:id/deactivate' do
@@ -180,19 +178,26 @@ post '/admin/users/:id/activate' do
 end
 
 get '/admin/users' do
+	@total_users = User.all.count
 	@users = User.all
 	erb :'/admin/users/index'
 end
 
 get '/admin/events' do
+	@total_users = User.all.count
 	erb :'/admin/events/index'
 end
 
 post '/admin/event' do
-	@event = Event.create(
+	@event = Event.new(
 		title: params[:title],
 		event_date: params[:date],
 		location: params[:location],
-		url: params[:url]
+		url: params[:url],
+		details: params[:details]
 	)
+	if @event.save
+		@success = true
+	end
+	erb :'/admin/events/index'
 end 

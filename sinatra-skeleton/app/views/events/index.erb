@@ -1,1 +1,18 @@
-<h1>This is where the events list is going to go!</h1>
+<% @events.each do |event| %>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+
+			<div class="panel panel-default">	
+	    	<div class="panel-body" data-toggle="collapse" data-target="#<%=event.id%>">
+	    		<h2><%= event.title %></h2><p><%= event.event_date %></p>
+	    	</div>
+	    	<div id="<%=event.id%>" class="collapse">
+		    	<p><%= event.location %></p>
+		    	<p><%= event.url %></p>
+		    	<p><%= event.created_at %></p>
+		    	<p><a href="/event/<%= event.id %>/details">View More Details</a>
+	  		</div>
+  		</div>
+		</div>
+	</div>
+<% end %>
