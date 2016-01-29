@@ -9,16 +9,31 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-  
+  <link href="/stylesheets/font-awesome.min.css" rel="stylesheet">
+  <link href="/fonts/icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet">
+  <link href="/stylesheets/animate.min.css" rel="stylesheet" media="screen">
+  <link href="/stylesheets/owl.theme.css" rel="stylesheet">
+  <link href="/stylesheets/owl.carousel.css" rel="stylesheet">
+
+  <!-- Colors -->
+  <link href="/stylesheets/css-index.css" rel="stylesheet" media="screen">
+  <!-- <link href="css/css-index-green.css" rel="stylesheet" media="screen"> -->
+  <!-- <link href="css/css-index-purple.css" rel="stylesheet" media="screen"> -->
+  <!-- <link href="css/css-index-red.css" rel="stylesheet" media="screen"> -->
+  <!-- <link href="css/css-index-orange.css" rel="stylesheet" media="screen"> -->
+  <!-- <link href="css/css-index-yellow.css" rel="stylesheet" media="screen"> -->
+
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic" />
   <link rel="stylesheet" href="/stylesheets/application.css">
   <link rel="stylesheet" media="screen" href="/stylesheets/bootstrap-admin-theme.css">
   <link rel="stylesheet" media="screen" href="/stylesheets/bootstrap-admin-theme-change-size.css">
 
   <title>International Student Connection</title>
 </head>
-<body>
+<body data-spy="scroll" data-target-"#navbar-scroll">
   <nav class="navbar navbar-default">
-    <div class="container-fluid">
+    <!-- <div class="container-fluid"> -->
       <div class="navbar-header">
         <% if current_user.nil? %>
           <a class="navbar-brand" href="/">ISC</a>
@@ -45,7 +60,7 @@
           <li><a href="/user/sign_out">Sign Out</a></li>
         </ul>
       <% end %>
-    </div>
+    <!-- </div> -->
   </nav>
   <%= yield %>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -53,5 +68,10 @@
   <script type="text/javascript" src="/javascript/twitter-bootstrap-hover-dropdown.min.js"></script>
   <script type="text/javascript" src="/javascript/bootstrap-admin-theme-change-size.js"></script>
   <script src="/javascript/application.js"></script>
+  <script src="/javascript/custom.js"></script>
+    <script src="/javascript/jquery.sticky.js"></script>
+  <script src="/javascript/wow.min.js"></script>
+  <script src="/javascript/owl.carousel.min.js"></script>
+
 </body>
 </html>

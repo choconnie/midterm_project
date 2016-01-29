@@ -1,5 +1,16 @@
-<div class="sigin_singup_form">
-	<div class="container">
+<% if @user && @user.errors.any? %>
+  <div class = "errors">
+    <strong>There are some issues with your submission:</strong>
+    <ul>
+      <% @user.errors.full_messages.each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="signin_singup_form">
+<!-- 	<div class="container"> -->
 	  <div class="row centered-form">
 	    <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
 	    	<div class="panel panel-default">
@@ -22,7 +33,7 @@
 		    		</form>
 		    	</div>
 	  		</div>
-		  </div>
+<!-- 		  </div> -->
 		</div>
 	</div>
 </div>

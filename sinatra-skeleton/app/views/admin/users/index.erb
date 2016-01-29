@@ -34,16 +34,25 @@
                             <div class="panel-heading">
                                 <div class="text-muted bootstrap-admin-box-title">Find Users</div>
                             </div>
-                            <div class="bootstrap-admin-panel-content text-muted" style="padding: 60px 0; text-align: center">
+                            <div class="bootstrap-admin-panel-content text-muted users_table">
                                 <% @users.each do |user| %>
                                     <div class = "row">
-                                        <div class="col-md-8">
+                                        <div class="col-md-6">
                                             <h4><%= user.username %></h4>
                                         </div>
-                                        <div>
-                                            <a href="#" class="btn btn-info">Deactivate</a>
+                                        <div class ="col-md-6">
+                                            <% if user.status == true %>
+                                           <form method="POST" action="/admin/users/<%=user.id%>/deactivate" role="form">
+                                                <input type="submit" class="btn btn-danger" value="Deactivate Account">
+                                            </form>
+                                            <% else %>
+                                            <form method="POST" action="/admin/users/<%=user.id%>/activate" role="form">
+                                                <input type="submit" class="btn btn-primary" value="Activate Account">
+                                            </form>
+                                            <% end %>
                                         </div>   
                                     </div>
+                                    <hr />
                                 <% end %>
                             </div>
                         </div>
