@@ -2,6 +2,11 @@ helpers do
 	def current_user
 		User.find(session[:user_id]) if session[:user_id]
 	end
+
+	def logged_in?
+    current_user != nil 
+  end
+
 end
 
 get '/' do
@@ -66,25 +71,32 @@ get '/services' do
  erb :'/services/index'
 end
 
-# Go to Profile
-get '/user/:id/profile' do
-	@user = current_user
- 	erb :'/user/profile'
-end
-
 # Go to profile
-post '/profile' do
+get '/user/:id/profile' do
+	#check if user is nulled
+	@user = current_user
 	erb :'/user/profile'
+	# if @user.nil?
+ #    erb :login
+ #  else 
+ #    session[:user_id] = @user.id
+ #    redirect to('/songs')
+ #  end
 end
  
 # Edit profile username and password
 post '/profile/:id' do
+	#check if user is nulled
 	username = params[:username]
 	password = params[:password]
 	user = current_user
  	user.update_attributes(username: username, password: password)
   redirect "/user/#{user.id}/dashboard"
 end
+
+# post '/profile/'
+
+# end
 
 get '/admin' do
 	@total_users = User.all.count

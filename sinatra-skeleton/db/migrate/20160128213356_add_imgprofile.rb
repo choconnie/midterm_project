@@ -4,7 +4,7 @@ class AddImgprofile < ActiveRecord::Migration
       t.string :description
       t.string :content_type
       t.string :filename
-      t.binary :binary_data
+      t.string :url
     end
   end
 end
