@@ -122,7 +122,7 @@ get '/profile' do
   erb :profile
 end
 
-Upload profile image to public folder
+# Upload profile image to public folder
 post '/profile' do
   @user = User.new(params[:user])
      # @user.username.upcase!
