@@ -1,3 +1,15 @@
+.signin_signup_form {
+    background-color: #525252;
+}
+.centered-form{
+	margin-top: 60px;
+}
+
+.centered-form .panel{
+	background: rgba(255, 255, 255, 0.8);
+	box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+}
+
 .announcement {
 	background-color: #fec057;
 	border-radius: 5px;
@@ -20,7 +32,7 @@
 }
 
 .dashboard {
-	margin: 0 1em;
+	margin: 1.5em 1em;
 }
 
 .announcement_form input{
@@ -29,4 +41,8 @@
 
 .errors {
 	text-align: center;
+}
+
+.navbar {
+	margin-bottom: .5em !important;
 }
