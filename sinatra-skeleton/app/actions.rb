@@ -7,6 +7,7 @@ helpers do
 	def current_user
 		User.find(session[:user_id]) if session[:user_id]
 	end
+
 end
 
 get '/' do
@@ -20,17 +21,21 @@ end
 post '/user/login' do
 	username = params[:username]
 	password = params[:password]
-	@user = User.find_by(username: username)
-	@user.password_check(password)
-	if (@user.password == password) && @user.status == true
-		session[:user_id] = @user.id
-		redirect "/user/#{@user.id}/dashboard"
-	elsif @user
-		@user.status_check
-		erb :'/user/login'
-	else
-		erb :'/user/login'
+	unless username.blank?
+		@user = User.find_by(username: username)
+		if @user == nil
+			@undefined = true
+			erb :'/user/login'
+		elsif (@user.password == password) && @user.status == true
+			session[:user_id] = @user.id
+			redirect "/user/#{@user.id}/dashboard"
+		elsif @user
+			@user.status_check
+			@user.password_check(password)
+			erb :'/user/login'
+		end
 	end
+	erb :'/user/login'
 end
 
 get '/user/:id/dashboard' do
@@ -57,7 +62,7 @@ post '/user/sign_up' do
 		email: params[:email]
 		)
 	if @user.save
-		redirect '/'
+		redirect '/user/login'
 	else
 		erb :'/user/sign_up/index'
 	end

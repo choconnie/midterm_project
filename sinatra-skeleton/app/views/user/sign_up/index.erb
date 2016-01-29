@@ -1,17 +1,17 @@
-<% if @user && @user.errors.any? %>
-    <div>
-      <strong>There are some issues with your submission:</strong>
-      <ul>
-        <% @user.errors.full_messages.each do |error| %>
-          <li><%= error %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
 <div class="container">
   <div class="row centered-form">
     <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+	    <% if @user && @user.errors.any? %>
+			  <% @user.errors.full_messages.each do |error| %>
+			    <div class = "row">
+			    	<div class = "col-md-12">
+			    		<div class="alert alert-danger">
+			    			<%= error %>
+			  			</div>
+						</div>
+					</div>
+			  <% end %>
+			<% end %>
     	<div class="panel panel-default">
     		<div class="panel-heading">
 	    		<h3 class="panel-title">Sign Up for International Student Connections<small>It's free!</small></h3>
