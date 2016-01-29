@@ -1,4 +1,9 @@
 helpers do
+
+	# def logged_in?
+ #    current_user != nil 
+ #  end
+ 
 	def current_user
 		User.find(session[:user_id]) if session[:user_id]
 	end
@@ -116,10 +121,9 @@ post '/admin/announcement' do
 		content: params[:content]
 		)
 	if @announcement.save
-		redirect '/admin'
-	else
-		erb :'/admin/index'
+		@success = true
 	end
+	erb :'/admin/index'
 end
 
 post '/admin/users/:id/deactivate' do
@@ -135,19 +139,25 @@ post '/admin/users/:id/activate' do
 end
 
 get '/admin/users' do
+	@total_users = User.all.count
 	@users = User.all
 	erb :'/admin/users/index'
 end
 
 get '/admin/events' do
+	@total_users = User.all.count
 	erb :'/admin/events/index'
 end
 
 post '/admin/event' do
-	@event = Event.create(
+	@event = Event.new(
 		title: params[:title],
 		event_date: params[:date],
 		location: params[:location],
 		url: params[:url]
 	)
+	if @event.save
+		@success = true
+	end
+	erb :'/admin/events/index'
 end 

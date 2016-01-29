@@ -25,6 +25,7 @@ NUMBER_OF_POSTS    = 10
 NUMBER_OF_COMMENTS = 15
 NUMBER_OF_SERVICES = 4
 NUMBER_OF_EVENTS   = 7
+NUMBER_OF_ANNOUNCEMENTS = 5
 
 ##########################################
 
@@ -90,5 +91,13 @@ NUMBER_OF_EVENTS.times do
     location:   Faker::Address.street_address,
     url:        Faker::Internet.url('example.com'),
     post_id:    Faker::Number.between(1, NUMBER_OF_POSTS)
+  )
+end
+
+# # Create announcements 
+NUMBER_OF_ANNOUNCEMENTS.times do
+  Announcement.create!(
+    title:      Faker::App.name,
+    content:    Faker::Hipster.sentence(4)
   )
 end

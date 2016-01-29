@@ -34,6 +34,21 @@
                                     <div class="text-muted bootstrap-admin-box-title">Announcements</div>
                                 </div>
                                 <div class="bootstrap-admin-panel-content text-muted" style="padding: 60px 0; text-align: center">
+                                    <% if @announcement && @announcement.errors.any? %>
+                                      <div class = "errors">
+                                        <strong>There are some issues with your submission:</strong>
+                                        <ul>
+                                        <% @announcement.errors.full_messages.each do |error| %>
+                                            <li><%= error %></li>
+                                          <% end %>
+                                        </ul>
+                                      </div>
+                                    <% elsif @announcement && (@success == true) %>
+                                        <div class="alert alert-success">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                            <strong>Success!</strong> Indicates a successful or positive action.
+                                        </div>
+                                    <% end %>
                                     <div class="row announcement_form">
 	                                    <div class="col-md-6 col-md-offset-3">
 		                                    <p>Create a New Announcement</p>

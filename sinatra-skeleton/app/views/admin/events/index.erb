@@ -10,7 +10,7 @@
                         <a href="/admin"><i class="glyphicon glyphicon-chevron-right"></i> Dashboard</a>
                     </li>
                     <li class="active">
-                        <a href="/admin/evemts"><i class="glyphicon glyphicon-chevron-right"></i>Events</a><!-- calendar.html -->
+                        <a href="/admin/events"><i class="glyphicon glyphicon-chevron-right"></i>Events</a><!-- calendar.html -->
                     </li>
                     <li>
                         <a href="/admin/users"><span class="badge pull-right"><%= @total_users %></span> Users</a>
@@ -30,6 +30,21 @@
 
                 <div class="row">
                     <div class="col-lg-12">
+                        <% if @event && @event.errors.any? %>
+                          <div class = "errors">
+                            <strong>There are some issues with your submission:</strong>
+                            <ul>
+                            <% @event.errors.full_messages.each do |error| %>
+                                <li><%= error %></li>
+                              <% end %>
+                            </ul>
+                          </div>
+                        <% elsif @event && (@success == true) %>
+                            <div class="alert alert-success">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>Success!</strong> Indicates a successful or positive action.
+                            </div>
+                        <% end %>
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="text-muted bootstrap-admin-box-title">Create an Event Listing</div>
