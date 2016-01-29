@@ -32,7 +32,7 @@ get '/user/:id/dashboard' do
 	@announcement = Announcement.last
 	@user = current_user
 	@memberships = Membership.where(user_id: @user.id)
-	@events = Event.all.limit(3)
+	@events = Event.all.order(:event_date).limit(3)
 	erb :'/user/dashboard'
 end
 

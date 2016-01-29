@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128213356) do
+ActiveRecord::Schema.define(version: 20160129022015) do
 
   create_table "announcements", force: :cascade do |t|
     t.string   "title"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20160128213356) do
   create_table "events", force: :cascade do |t|
     t.integer  "post_id"
     t.string   "title"
-    t.string   "event_date"
+    t.date     "event_date"
     t.string   "location"
     t.string   "url"
     t.datetime "created_at"

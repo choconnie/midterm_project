@@ -49,3 +49,7 @@
 .navbar {
 	margin-bottom: .5em !important;
 }
+
+.users_table {
+	text-align: center;
+}
