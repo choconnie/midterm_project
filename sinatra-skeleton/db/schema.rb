@@ -57,10 +57,11 @@ ActiveRecord::Schema.define(version: 20160129022015) do
   add_index "memberships", ["user_id"], name: "index_memberships_on_user_id"
 
   create_table "photos", force: :cascade do |t|
-    t.string "description"
-    t.string "content_type"
-    t.string "filename"
-    t.binary "binary_data"
+    t.string  "description"
+    t.string  "content_type"
+    t.string  "filename"
+    t.string  "url"
+    t.integer "user_id"
   end
 
   create_table "posts", force: :cascade do |t|
