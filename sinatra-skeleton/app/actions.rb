@@ -122,24 +122,24 @@ get '/profile' do
   erb :profile
 end
 
-# Upload profile image to public folder
-# post '/profile' do
-#   @user = User.new(params[:user])
-#      @user.username.upcase!
-#   if @user.save
-#     session[:id] = @user.id
-#     if params[:file].present?
-#       tempfile = params[:file][:tempfile]
-#       filename = params[:file][:filename]
-#       cp(tempfile.path, "public/uploads_imgs/#{@user.id}")
-#       redirect '/profile'
-#     else
-#       redirect '/profile'
-#     end
-#   else
-#     erb :'/login'
-#   end
-# end
+Upload profile image to public folder
+post '/profile' do
+  @user = User.new(params[:user])
+     # @user.username.upcase!
+  if @user.save
+    session[:id] = @user.id
+    if params[:file].present?
+      tempfile = params[:file][:tempfile]
+      filename = params[:file][:filename]
+      cp(tempfile.path, "public/uploads_imgs/#{@user.id}")
+      redirect '/profile'
+    else
+      redirect '/profile'
+    end
+  else
+    erb :'/login'
+  end
+end
 
 post '/profile/<%= @user.id %>/upload_imgs' do
   tempfile = params['file'][:tempfile]
