@@ -7,32 +7,30 @@
       <div class="text-center">
         <img src="http://lorempixel.com/200/200/people/4/" class="avatar img-circle img-thumbnail" alt="avatar">
         <h6>Upload a different photo...</h6>
-        <input type="file" class="text-center center-block well well-sm">
-        <asp:Button OnClick="submit" Text="Submit" runat="server" />
+        <div class="registration_form">
+          <form action="/profile/<%= @user.id %>/upload_imgs" method="post" enctype="multipart/form-data" accept="image/jpeg">
+            <input class="text-center center-block well well-sm" type="file" name="img_file" id="upload_img"> 
+            <input type="submit" value="Upload Image" name="submit">
+          </form>
+        </div>
       </div>
     </div>
 
     <!-- Username -->
-    <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+    <div class="col-md-8 col-sm-8 col-md-12 personal-info">
       <br><br>
       <div class="input-group add-on">
+        <span class="input-group-addon" id="basic-addon1">username</span>
         <input type="text" class="form-control" name="username" value="<%= @user.username %>">
-        <div class="input-group-btn">
-          <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-edit"></i></button>
-        </div>
       </div>
       <br>
       <div class="input-group add-on">
+        <span class="input-group-addon" id="basic-addon1">password</span>
         <input type="text" class="form-control" name="password" value="<%= @user.password %>">
-        <div class="input-group-btn">
-          <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-edit"></i></button>
-        </div>
       </div>
-      <br>
        <!-- Save and Cancel Button -->
       <div class="form-group">
-        <label class="col-md-0 control-label"></label>
-        <div class="col-md-8">
+        <div class="col-sm-0">
           <input class="btn btn-primary" value="Save Changes" type="submit">
           <span></span>
           <a href="/user/<%= @user.id %>/dashboard"><input class="btn btn-default" value="Cancel" type="button"></a>
@@ -44,26 +42,9 @@
 </div>
 
 
-<!-- <div class="fileinput fileinput-new" data-provides="fileinput">
-  <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-    <img data-src="holder.js/100%x100%" alt="...">
-  </div>
-  <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
-  <div>
-    <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" name="..."></span>
-    <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-  </div>
-</div> -->
 
-
-<form action="/profile/<%= @user.id %>/upload" method="post" enctype="multipart/form-data" accept="image/gif, image/jpeg">
   
-  <input type="file" name="fileToUpload" id="fileToUpload">
-  <input type="submit" value="Upload Image" name="submit">
-</form>
+    
 
-%h1 File uploader!
-    %form(method="post" enctype='multipart/form-data')   
-      %input(type='file' name='myfile')    
-      %br
-      %input(type='submit' value='Upload!')
+
+

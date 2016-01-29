@@ -1,11 +1,12 @@
 helpers do
-	def current_user
-		User.find(session[:user_id]) if session[:user_id]
-	end
 
 	def logged_in?
     current_user != nil 
   end
+
+	def current_user
+		User.find(session[:user_id]) if session[:user_id]
+	end
 
 end
 
@@ -96,20 +97,18 @@ end
 
 # Go to profile
 get '/user/:id/profile' do
-	#check if user is nulled
 	@user = current_user
 	erb :'/user/profile'
-	# if @user.nil?
- #    erb :login
- #  else 
- #    session[:user_id] = @user.id
- #    redirect to('/songs')
- #  end
+		# if @user.nil?
+	 #    erb :login
+	 #  else 
+	 #    session[:user_id] = @user.id
+	 #    redirect "/user/#{user.id}/profile"
+	 #  end
 end
 
 # Edit profile username and password
 post '/profile/:id' do
-	#check if user is nulled
 	username = params[:username]
 	password = params[:password]
 	user = current_user
@@ -117,9 +116,29 @@ post '/profile/:id' do
   redirect "/user/#{user.id}/dashboard"
 end
 
-# post '/profile/'
+# Get profile with image
+get '/profile' do
+  @user = User.new
+  erb :profile
+end
 
-# end
+post '/profile' do
+  @user = User.new(params[:user])
+     @user.username.upcase!
+  if @user.save
+    session[:id] = @user.id
+    if params[:file].present?
+      tempfile = params[:file][:tempfile]
+      filename = params[:file][:filename]
+      cp(tempfile.path, "public/uploads_imgs/#{@user.id}")
+      redirect '/profile'
+    else
+      redirect '/profile'
+    end
+  else
+    erb :'/login'
+  end
+end
 
 get '/admin' do
 	@total_users = User.all.count
