@@ -76,6 +76,7 @@ get '/groups/:id/posts/:id/details' do
 end
 
 get '/events' do
+	@events = Event.where("event_date >= ?", Date.today).order(:event_date)
   erb :'/events/index'
 end
 
