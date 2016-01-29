@@ -88,6 +88,7 @@ NUMBER_OF_EVENTS.times do
   Event.create!(
     title:      Faker::App.name,
     event_date: Faker::Date.forward(30),
+    details:    Faker::Hipster.paragraph(3),
     location:   Faker::Address.street_address,
     url:        Faker::Internet.url('example.com'),
     post_id:    Faker::Number.between(1, NUMBER_OF_POSTS)

@@ -85,6 +85,11 @@ get '/events' do
   erb :'/events/index'
 end
 
+get '/event/:id/details' do
+	@event = Event.find params[:id]
+	erb :'/events/details/index'
+end
+
 get '/services' do
 	@services = Service.all
   erb :'/services/index'
