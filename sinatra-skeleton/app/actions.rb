@@ -37,7 +37,7 @@ get '/user/:id/dashboard' do
 	@announcement = Announcement.last
 	@user = current_user
 	@memberships = Membership.where(user_id: @user.id)
-	@events = Event.all.order(:event_date).limit(3)
+	@events = Event.where("event_date >= ?", Date.today).order(:event_date).limit(3)
 	erb :'/user/dashboard'
 end
 
@@ -159,7 +159,8 @@ post '/admin/event' do
 		title: params[:title],
 		event_date: params[:date],
 		location: params[:location],
-		url: params[:url]
+		url: params[:url],
+		details: params[:details]
 	)
 	if @event.save
 		@success = true
