@@ -1,3 +1,5 @@
+require_relative('./helpers/view_helpers.rb')
+
 helpers do
 
 	# def logged_in?
@@ -103,6 +105,31 @@ end
 # end
 
 # Link to see group details
+post '/groups/join/membership' do
+	@user = current_user
+	session[:group_id] = params[:group_id]
+	@group = Group.find(session[:group_id])
+
+  registered = Membership.where(user_id: @user.id).where(group_id: @group.id)
+  if !(registered.empty?)
+ 	  session.delete(:group_id)
+ 	  redirect '/groups'
+  else
+    @membership = Membership.new(
+      user_id: current_user.id,
+  	  group_id: params[:group_id]
+  	)
+  	@membership.save
+  	redirect "/groups/#{@group.id}/join"
+  end
+end
+
+get '/groups/:id/join' do
+	@group = Group.find(session[:group_id])
+	session.delete(:group_id)
+  erb :'/groups/join'
+end
+
 get '/groups/:id/details' do
 	@group = Group.find(params[:id])
 	@posts = Post.where(group_id: @group.id)
