@@ -232,3 +232,7 @@ post '/admin/event' do
 	end
 	erb :'/admin/events/index'
 end 
+
+get '/admin/groups' do
+	erb :'/admin/groups/index'
+end
