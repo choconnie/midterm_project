@@ -1,8 +1,8 @@
 helpers do
 
-	# def logged_in?
- #    current_user != nil 
- #  end
+  # def logged_in?
+  #   current_user != nil 
+  # end
  
 	def current_user
 		User.find(session[:user_id]) if session[:user_id]
@@ -71,9 +71,14 @@ end
 #####>>>>>> Start of Group View
 
 # List all groups
+# get '/groups' do
+#   @groups = Group.all
+#   erb :'groups/index'
+# end
+
 get '/groups' do
-  @groups = Group.all
-  erb :'groups/index'
+	@groups = Group.where(status: true)
+	erb :'groups/index'
 end
 
 # Form to Add new group
@@ -182,6 +187,7 @@ end
 
 get '/admin' do
 	@total_users = User.all.count
+	@total_groups = Group.all.count
 	erb :'/admin/index'
 end
 
@@ -210,12 +216,14 @@ end
 
 get '/admin/users' do
 	@total_users = User.all.count
+	@total_groups = Group.all.count
 	@users = User.all
 	erb :'/admin/users/index'
 end
 
 get '/admin/events' do
 	@total_users = User.all.count
+	@total_groups = Group.all.count
 	erb :'/admin/events/index'
 end
 
@@ -232,3 +240,33 @@ post '/admin/event' do
 	end
 	erb :'/admin/events/index'
 end 
+
+#####>>>>>> Start of Admin Delete Group View
+
+post '/admin/groups/:id/deactivate' do
+	@group = Group.find params[:id]
+	@group.update_attributes(status: false)
+	redirect '/admin/groups'
+end
+
+post '/admin/groups/:id/activate' do
+	@group = Group.find params[:id]
+	@group.update_attributes(status: true)
+	redirect '/admin/groups'
+end
+
+get '/admin/groups' do
+	@total_users = User.all.count
+	@total_groups = Group.all.count
+	@groups = Group.all
+	erb :'/admin/groups/index'
+end
+
+#####>>>>>> End of Admin Delete Group View
+
+
+
+
+
+
+
