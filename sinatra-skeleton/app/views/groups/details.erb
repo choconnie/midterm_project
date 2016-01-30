@@ -1,15 +1,24 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
+      <hr/>
       <h1 style="text-align: center">Post List</h1>
+      <hr/>
+      <a href="/groups/#{@group.id}/post/new">
+        <button type="button" class="btn btn-primary btn-sm" name="join">Add New Post</button>
+      </a>
+      <br/><br/>
       <% @posts.each do |post| %>
         <div class="post">
           <p>
             <a href="/groups/<%= post.group_id%>/posts/<%= post.id %>/details"><%= post.title %></a>
-            <%= limit_to_num_of_char(post.content, 100) %><br/>Created at: <%= post.created_at %>
+            <%= limit_to_num_of_char(post.content, 100) %>
+            <br/>Created at: <%= post.created_at %>
+            <br/>
           </p>
         </div>
       <% end %>
+      <br/><br/><hr/>
       <a href="/groups">Back to group list</a>
     </div>
   </div>

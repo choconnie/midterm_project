@@ -105,7 +105,6 @@ end
 # 	redirect '/groups'
 # end
 
-# Link to see group details
 post '/groups/join/membership' do
 	@user = current_user
 	session[:group_id] = params[:group_id]
@@ -125,6 +124,7 @@ post '/groups/join/membership' do
   end
 end
 
+# Link to see group details
 get '/groups/:id/join' do
 	@group = Group.find(session[:group_id])
 	session.delete(:group_id)
@@ -142,6 +142,19 @@ get '/groups/:id/posts/:id/details' do
 	@post = Post.find(params[:id])
 	@comments = Comment.where(post_id: @post.id)
   erb :'/groups/posts/details'
+end
+
+get '/groups/:id/posts/new' do
+  
+  erb :'/groups/posts/new'
+end
+
+post '/create_new_post' do
+  @new_post = Post.new(
+    title: params[:title],
+    content: params[:content]
+  )
+  erb :'/groups/posts/new'
 end
 
 #####>>>>>> End of Group View
