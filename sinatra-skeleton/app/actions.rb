@@ -88,7 +88,8 @@ end
 post '/groups' do
 	@group = Group.new(
 		group_name: params[:group_name],
-		city: params[:city]
+		city: params[:city],
+    description: params[:description]
 	)
 	if @group.save
     redirect '/groups'
