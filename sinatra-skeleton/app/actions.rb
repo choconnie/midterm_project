@@ -68,22 +68,55 @@ post '/user/sign_up' do
 	end
 end
 
+#####>>>>>> Start of Group View
+
+# List all groups
 get '/groups' do
   @groups = Group.all
-  erb :'/groups/index'
+  erb :'groups/index'
 end
 
+# Form to Add new group
+get '/groups/new' do
+	@group = Group.new
+	erb :'groups/new'
+end
+
+# Add to Group List and Save
+post '/groups' do
+	@group = Group.new(
+		group_name: params[:group_name],
+		city: params[:city]
+	)
+	if @group.save
+    redirect '/groups'
+  else
+    erb :'groups/new'
+  end
+end
+
+# Delete Group from list
+# post '/group/:id/delete' do
+# 	group = Group.find(params[:id])
+# 	group.delete
+# 	redirect '/groups'
+# end
+
+# Link to see group details
 get '/groups/:id/details' do
 	@group = Group.find(params[:id])
 	@posts = Post.where(group_id: @group.id)
   erb :'/groups/details'
 end
 
+# Link to Group Post details
 get '/groups/:id/posts/:id/details' do
 	@post = Post.find(params[:id])
 	@comments = Comment.where(post_id: @post.id)
   erb :'/groups/posts/details'
 end
+
+#####>>>>>> End of Group View
 
 get '/events' do
 	@events = Event.where("event_date >= ?", Date.today).order(:event_date)
@@ -105,7 +138,7 @@ get '/services/:id/details' do
   erb :'/services/details'
 end
 
-#### Start of Profile View
+#####>>>>>> Start of Profile View
 
 # Go to Profile
 get '/user/:id/profile' do
@@ -113,6 +146,7 @@ get '/user/:id/profile' do
  	erb :'/user/profile'
 end
 
+# Update the username and password of profile
 post '/profile/:id' do
 	username = params[:username]
 	password = params[:password]
@@ -121,6 +155,7 @@ post '/profile/:id' do
 	redirect "/user/#{user.id}/dashboard"
 end
 
+# Choose and image for profile
 post '/save_image' do
   
   @filename = params[:file][:filename]
@@ -132,6 +167,7 @@ post '/save_image' do
   erb :'show'
 end
 
+# Upload image to profile
 post '/user/profile/upload' do 
 	@user = current_user
 		File.open('./public/uploads/user_avatars/'+params[:user_image][:filename], "wb") do |new_file|
@@ -142,7 +178,7 @@ post '/user/profile/upload' do
  		erb :'/user/profile'
 end
 
-## End of profile view
+#####>>>>>> End of profile view
 
 get '/admin' do
 	@total_users = User.all.count
