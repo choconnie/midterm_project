@@ -31,6 +31,10 @@
 	padding: 1em;
 }
 
+.event_listing {
+	text-align: center;
+}
+
 .dashboard {
 	margin: 1.5em 1em;
 }
