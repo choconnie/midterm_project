@@ -1,9 +1,5 @@
 helpers do
 
-	# def logged_in?
- #    current_user != nil 
- #  end
- 
 	def current_user
 		User.find(session[:user_id]) if session[:user_id]
 	end
@@ -105,24 +101,28 @@ get '/services/:id/details' do
   erb :'/services/details'
 end
 
+#### Start of Profile View
+
 # Go to Profile
 get '/user/:id/profile' do
 	@user = current_user
+	# @photo = Photo.find_by user_id: params[:id]
  	erb :'/user/profile'
 end
 
-# Edit profile username and password
-post '/profile/:id' do
-	username = params[:username]
-	password = params[:password]
-	user = current_user
- 	user.update_attributes(username: username, password: password)
-  redirect "/user/#{user.id}/dashboard"
+post '/save_image' do
+  
+  @filename = params[:file][:filename]
+  file = params[:file][:tempfile]
+
+  File.open("./public/uploads_imgs/#{@filename}", 'wb') do |f|
+    f.write(file.read)
+  end 
+  erb :'show'
 end
 
 post '/user/profile/upload' do 
 	@user = current_user
-	
 		File.open('./public/uploads/user_avatars/'+params[:user_image][:filename], "wb") do |new_file|
     new_file.write(params[:user_image][:tempfile].read)
 	  end
