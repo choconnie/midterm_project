@@ -5,7 +5,6 @@
       <!-- left, vertical navbar -->
       <div class="col-md-2 bootstrap-admin-col-left">
         <ul class="nav navbar-collapse collapse bootstrap-admin-navbar-side">
-          
           <li>
             <a href="/admin"><i class="glyphicon glyphicon-chevron-right"></i> Dashboard</a>
           </li>
@@ -17,6 +16,9 @@
           </li>
           <li class="active">
             <a href="/admin/users"><span class="badge pull-right"><%= @total_users %></span> Users</a>
+          </li>
+          <li>
+            <a href="/admin/groups"><span class="badge pull-right"><%= @total_groups %></span> Groups</a>
           </li>
         </ul>
       </div>
@@ -50,7 +52,7 @@
                     </form>
                     <% else %>
                     <form method="POST" action="/admin/users/<%=user.id%>/activate" role="form">
-                      <input type="submit" class="btn btn-primary" value="Activate Account">
+                      <input type="submit" class="btn btn-small btn-success" value="Activate Account">
                     </form>
                     <% end %>
                   </div>   
