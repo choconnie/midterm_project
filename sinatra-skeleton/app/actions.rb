@@ -100,54 +100,54 @@ get '/services/:id/details' do
   erb :'/services/details'
 end
 
+#### Start of Profile View
+
 # Go to Profile
 get '/user/:id/profile' do
 	@user = current_user
+	# @photo = Photo.find_by user_id: params[:id]
  	erb :'/user/profile'
 end
 
-# Edit profile username and password
-post '/profile/:id' do
-	username = params[:username]
-	password = params[:password]
-	user = current_user
- 	user.update_attributes(username: username, password: password)
-  redirect "/user/#{user.id}/dashboard"
+post '/save_image' do
+  
+  @filename = params[:file][:filename]
+  file = params[:file][:tempfile]
+
+  File.open("./public/uploads_imgs/#{@filename}", 'wb') do |f|
+    f.write(file.read)
+  end 
+  erb :'show'
 end
+
+
 
 # Get profile with image
-get '/profile' do
-  @user = User.new
-  erb :profile
-end
+# get '/profile' do
+#   @user = User.new
+#   erb :profile
+# end
 
-# Upload profile image to public folder
-post '/profile' do
-  @user = User.new(params[:user])
-     # @user.username.upcase!
-  if @user.save
-    session[:id] = @user.id
-    if params[:file].present?
-      tempfile = params[:file][:tempfile]
-      filename = params[:file][:filename]
-      cp(tempfile.path, "public/uploads_imgs/#{@user.id}")
-      redirect '/profile'
-    else
-      redirect '/profile'
-    end
-  else
-    erb :'/login'
-  end
-end
+# Upload image for profile
+# post '/profile/:id' do 
+# 	username = params[:username]
+# 	password = params[:password]
+# 	user = current_user
+#  	user.update_attributes(username: username, password: password)
 
-post '/profile/<%= @user.id %>/upload_imgs' do
-  tempfile = params['file'][:tempfile]
-  filename = params['file'][:filename]
-  File.copy(tempfile.path, "public/uploads_imgs/#{@user.id}")
-  redirect '/user/profile'
-end
+# 	@user_image = User.find_by(filename: params[:filename])
+# 	File.open('uploads_imgs/' + params[:user_image][:filename], "wb") do |new_file|
+#     new_file.write(params[:user_image][:tempfile].read)
+#   end
+#   @user_image.update_attributes(user_image: user_image)
+# 	if @user_image.persisted?
+# 		redirect '/user/#{user.id}/profile'
+# 	else
+# 		erb :'user/profile'
+# 	end
+# end
 
-# End of Profile Actions
+##### End of Profile Actions
 
 get '/admin' do
 	@total_users = User.all.count
