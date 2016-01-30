@@ -13,5 +13,4 @@ class User < ActiveRecord::Base
   def password_check(pw)
   	errors.add(:password, ": Your password is incorrect. Please try again.") unless (self.password == pw)
   end
-
 end
