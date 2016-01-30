@@ -3,20 +3,28 @@
   <div class="row">
     <!-- left column -->
     <div class="col-md-4 col-sm-6 col-xs-12">
-    <form method="post" action="/profile/<%= @user.id %>">
       <div class="text-center">
-        <img src="<%= @user.id %>" class="avatar img-circle img-thumbnail" alt="avatar">
+        <img src="/uploads/user_avatars/<%=@user.avatar_name %>" class="avatar img-circle img-thumbnail" alt="avatar">
         <h6>Upload a different photo...</h6>
         <div class="registration_form">
-          <form method="post" action="/profile/<%= @user.id %>/upload_imgs" enctype="multipart/form-data" accept="image/jpeg">
-            <input class="text-center center-block well well-sm" type="file" name="img_file" id="upload_img"> 
-            <input type="submit" value="Upload Image" name="submit">
+          <form class="col-md-8 col-md-offset-2" method="POST" action="/user/profile/upload" enctype='multipart/form-data'>
+            <div class="control-group">
+                <input class="text-center center-block well well-sm" id="user_image" 
+                  name="user_image" type="file" required="required">
+            </div>
+            <br>
+            <div>
+                <button class="btn btn-lg btn-primary" type="submit">
+                  Send
+                </button>
+            </div>
           </form>
         </div>
       </div>
     </div>
 
     <!-- Username -->
+  <form method="post" action="/profile/<%= @user.id %>">
     <div class="col-md-8 col-sm-8 col-md-12 personal-info">
       <br><br>
       <div class="input-group add-on">

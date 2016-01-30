@@ -120,6 +120,17 @@ post '/profile/:id' do
   redirect "/user/#{user.id}/dashboard"
 end
 
+post '/user/profile/upload' do 
+	@user = current_user
+	
+		File.open('./public/uploads/user_avatars/'+params[:user_image][:filename], "wb") do |new_file|
+    new_file.write(params[:user_image][:tempfile].read)
+	  end
+	  @user.avatar_name = params[:user_image][:filename]
+	  @user.save
+ 		erb :'/user/profile'
+end
+
 get '/admin' do
 	@total_users = User.all.count
 	erb :'/admin/index'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160129180741) do
+ActiveRecord::Schema.define(version: 20160130010008) do
 
   create_table "announcements", force: :cascade do |t|
     t.string   "title"
@@ -88,10 +88,11 @@ ActiveRecord::Schema.define(version: 20160129180741) do
     t.string   "username"
     t.string   "password"
     t.string   "email"
-    t.boolean  "status",     default: true
+    t.boolean  "status",      default: true
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "admin",      default: false
+    t.boolean  "admin",       default: false
+    t.string   "avatar_name"
   end
 
 end
