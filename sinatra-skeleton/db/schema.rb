@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20160130190538) do
     t.datetime "updated_at"
     t.string   "description"
     t.integer  "user_id"
-    t.boolean  "status",     default: false
+    t.boolean  "status",      default: false
   end
 
   create_table "memberships", id: false, force: :cascade do |t|
