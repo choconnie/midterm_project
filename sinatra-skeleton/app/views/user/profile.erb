@@ -1,51 +1,50 @@
 <div class="container" style="padding-top: 60px;">
   <h1 class="page-header">Welcome <%= @user.username %></h1>
   <div class="row">
-    <!-- left column -->
-    <div class="col-md-4 col-sm-6 col-xs-12">
+    <!-- <div class="col-md-3 col-sm-4 col-xs-12"> -->
       <div class="text-center">
-        <img src="/uploads/user_avatars/<%=@user.avatar_name %>" class="avatar img-circle img-thumbnail" alt="avatar">
+        <img src="/uploads/user_avatars/<%=@user.avatar_name %>" class="avatar img-circle img-thumbnail" alt="avatar" col-lg-push-2>
         <h6>Upload a different photo...</h6>
         <div class="registration_form">
           <form class="col-md-8 col-md-offset-2" method="POST" action="/user/profile/upload" enctype='multipart/form-data'>
             <div class="control-group">
+              <!-- <input type="file" class="filestyle" data-buttonText="Find file">
+              <input type="file" class="filestyle" data-buttonName="btn-primary">  -->
                 <input class="text-center center-block well well-sm" id="user_image" 
                   name="user_image" type="file" required="required">
             </div>
-            <br>
             <div>
-                <button class="btn btn-lg btn-primary" type="submit">
-                  Send
-                </button>
+                <button class="btn btn-small btn-success" type="submit">Upload Image</button>
             </div>
           </form>
-        </div>
+        <!-- </div> -->
       </div>
     </div>
 
     <!-- Username -->
   <form method="post" action="/profile/<%= @user.id %>">
-    <div class="col-md-8 col-sm-8 col-md-12 personal-info">
+    <div class="col-md-7 col-sm-10 col-md-12 personal-info col-lg-push-2" >
       <br><br>
       <div class="input-group add-on">
         <span class="input-group-addon" id="basic-addon1">username</span>
-        <input type="text" class="form-control" name="username" value="<%= @user.username %>">
+        <input type="text" class="form-control input-lg" name="username" value="<%= @user.username %>">
       </div>
       <br>
       <div class="input-group add-on">
         <span class="input-group-addon" id="basic-addon1">password</span>
-        <input type="text" class="form-control" name="password" value="<%= @user.password %>">
+        <input type="text" class="form-control input-lg" name="password" value="<%= @user.password %>">
       </div>
        <!-- Save and Cancel Button -->
       <div class="form-group">
         <div class="col-sm-0">
-          <input class="btn btn-primary" value="Save Changes" type="submit">
+          <br>
+          <input class="btn btn-small btn-success" name="Save Changes" value="Save Changes" type="submit">
           <span></span>
-          <a href="/user/<%= @user.id %>/dashboard"><input class="btn btn-default" value="Cancel" type="button"></a>
+          <a href="/user/<%= @user.id %>/dashboard"><input class="btn btn-small btn-success" value="Cancel" type="button"></a>
         </div>
       </div>
-      </form>
     </div>
+  </form>
   </div>
 </div>
 

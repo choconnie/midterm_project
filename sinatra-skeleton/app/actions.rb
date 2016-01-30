@@ -110,8 +110,15 @@ end
 # Go to Profile
 get '/user/:id/profile' do
 	@user = current_user
-	# @photo = Photo.find_by user_id: params[:id]
  	erb :'/user/profile'
+end
+
+post '/profile/:id' do
+	username = params[:username]
+	password = params[:password]
+	user = current_user
+	user.update_attributes(username: username, password: password)
+	redirect "/user/#{user.id}/dashboard"
 end
 
 post '/save_image' do
@@ -134,6 +141,8 @@ post '/user/profile/upload' do
 	  @user.save
  		erb :'/user/profile'
 end
+
+## End of profile view
 
 get '/admin' do
 	@total_users = User.all.count
