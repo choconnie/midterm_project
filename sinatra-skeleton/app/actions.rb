@@ -120,6 +120,10 @@ end
 
 get '/events' do
 	@events = Event.where("event_date >= ?", Date.today).order(:event_date)
+	@page = Nokogiri::HTML(open("http://www.blogto.com/events/"))
+	@blog_to_links = @page.css('.event-name a').map{|a| [a.text.strip, a["href"]]}
+	@blog_to_summary = @page.css('.event-summary').map{|x| [x.text]}
+	@blog_to_events = @blog_to_links.zip(@blog_to_summary)
   erb :'/events/index'
 end
 
