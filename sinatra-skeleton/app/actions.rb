@@ -125,34 +125,15 @@ post '/save_image' do
   erb :'show'
 end
 
-
-
-# Get profile with image
-# get '/profile' do
-#   @user = User.new
-#   erb :profile
-# end
-
-# Upload image for profile
-# post '/profile/:id' do 
-# 	username = params[:username]
-# 	password = params[:password]
-# 	user = current_user
-#  	user.update_attributes(username: username, password: password)
-
-# 	@user_image = User.find_by(filename: params[:filename])
-# 	File.open('uploads_imgs/' + params[:user_image][:filename], "wb") do |new_file|
-#     new_file.write(params[:user_image][:tempfile].read)
-#   end
-#   @user_image.update_attributes(user_image: user_image)
-# 	if @user_image.persisted?
-# 		redirect '/user/#{user.id}/profile'
-# 	else
-# 		erb :'user/profile'
-# 	end
-# end
-
-##### End of Profile Actions
+post '/user/profile/upload' do 
+	@user = current_user
+		File.open('./public/uploads/user_avatars/'+params[:user_image][:filename], "wb") do |new_file|
+    new_file.write(params[:user_image][:tempfile].read)
+	  end
+	  @user.avatar_name = params[:user_image][:filename]
+	  @user.save
+ 		erb :'/user/profile'
+end
 
 get '/admin' do
 	@total_users = User.all.count
