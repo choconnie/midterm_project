@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'bundler/setup'
-
+require 'nokogiri'
+require 'open-uri'
 require 'active_support/all'
 
 # Load Sinatra Framework (with AR)

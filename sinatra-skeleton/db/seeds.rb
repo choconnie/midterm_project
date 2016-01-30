@@ -19,10 +19,10 @@ require 'faker'
 ##########################################
 ##  Change this numbers to generate things as much as you want
 
-NUMBER_OF_USERS    = 5
-NUMBER_OF_GROUPS   = 3
+NUMBER_OF_USERS    = 10
+NUMBER_OF_GROUPS   = 5
 NUMBER_OF_POSTS    = 10
-NUMBER_OF_COMMENTS = 15
+NUMBER_OF_COMMENTS = 30
 NUMBER_OF_SERVICES = 4
 NUMBER_OF_EVENTS   = 7
 NUMBER_OF_ANNOUNCEMENTS = 5
@@ -42,8 +42,9 @@ end
 # # Create groups
 NUMBER_OF_GROUPS.times do
   Group.create!(
-    group_name: Faker::Team.name,
-    city:       Faker::Address.city
+    group_name:  Faker::Team.name,
+    city:        Faker::Address.city,
+    description: Faker::Lorem.paragraph
   )
 end
 

@@ -4,16 +4,29 @@
     <div class="row">
       <!-- left, vertical navbar -->
       <div class="col-md-2 bootstrap-admin-col-left">
+
+        <ul class="nav navbar-collapse collapse bootstrap-admin-navbar-side">
+          
+
         <ul class="nav navbar-collapse collapse bootstrap-admin-navbar-side">          
+
           <li>
             <a href="/admin"><i class="glyphicon glyphicon-chevron-right"></i> Dashboard</a>
           </li>
           <li>
+
+            <a href="/admin/events"><i class="glyphicon glyphicon-chevron-right"></i>Events</a>
+          </li>
+          <li class="active">
+            <a href="/admin/groups"><i class="glyphicon glyphicon-chevron-right"></i>Groups</a>
+
             <a href="/admin/events"><i class="glyphicon glyphicon-chevron-right"></i>Events</a><!-- calendar.html -->
+
           </li>
           <li>
             <a href="/admin/users"><span class="badge pull-right"><%= @total_users %></span> Users</a>
           </li>
+
           <li class="active">
             <a href="/admin/groups"><span class="badge pull-right"><%= @total_groups %></span> Groups</a>
           </li>
@@ -34,6 +47,9 @@
           <div class="col-lg-12">
             <div class="panel panel-default">
               <div class="panel-heading">
+                <div class="text-muted bootstrap-admin-box-title">Title Goes Here</div>
+              </div>
+              <div class="bootstrap-admin-panel-content text-muted users_table">
                 <div class="text-muted bootstrap-admin-box-title">Find Groups</div>
               </div>
               <div class="bootstrap-admin-panel-content text-muted users_table">

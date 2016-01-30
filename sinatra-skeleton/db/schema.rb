@@ -11,6 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20160130190538) do
 
   create_table "announcements", force: :cascade do |t|
@@ -47,6 +48,7 @@ ActiveRecord::Schema.define(version: 20160130190538) do
     t.string   "city"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "description"
     t.integer  "user_id"
     t.boolean  "status",     default: false
   end
@@ -77,6 +79,14 @@ ActiveRecord::Schema.define(version: 20160130190538) do
 
   add_index "posts", ["group_id"], name: "index_posts_on_group_id"
 
+  create_table "posts_tags", id: false, force: :cascade do |t|
+    t.integer "tag_id"
+    t.integer "post_id"
+  end
+
+  add_index "posts_tags", ["post_id"], name: "index_posts_tags_on_post_id"
+  add_index "posts_tags", ["tag_id"], name: "index_posts_tags_on_tag_id"
+
   create_table "services", force: :cascade do |t|
     t.string   "title"
     t.string   "content"
@@ -84,6 +94,10 @@ ActiveRecord::Schema.define(version: 20160130190538) do
     t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
   end
 
   create_table "users", force: :cascade do |t|
@@ -94,7 +108,7 @@ ActiveRecord::Schema.define(version: 20160130190538) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "admin",       default: false
-    t.string   "avatar_name"
+    t.string   "avatar_name", default: "avatar.png"
   end
 
 end

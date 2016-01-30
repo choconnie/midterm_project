@@ -1,3 +1,5 @@
+require_relative('./helpers/view_helpers.rb')
+
 helpers do
 
   # def logged_in?
@@ -91,7 +93,8 @@ end
 post '/groups' do
 	@group = Group.new(
 		group_name: params[:group_name],
-		city: params[:city]
+		city: params[:city],
+    description: params[:description]
 	)
 	if @group.save
     redirect '/groups'
@@ -108,6 +111,31 @@ end
 # end
 
 # Link to see group details
+post '/groups/join/membership' do
+	@user = current_user
+	session[:group_id] = params[:group_id]
+	@group = Group.find(session[:group_id])
+
+  registered = Membership.where(user_id: @user.id).where(group_id: @group.id)
+  if !(registered.empty?)
+ 	  session.delete(:group_id)
+ 	  redirect '/groups'
+  else
+    @membership = Membership.new(
+      user_id: current_user.id,
+  	  group_id: params[:group_id]
+  	)
+  	@membership.save
+  	redirect "/groups/#{@group.id}/join"
+  end
+end
+
+get '/groups/:id/join' do
+	@group = Group.find(session[:group_id])
+	session.delete(:group_id)
+  erb :'/groups/join'
+end
+
 get '/groups/:id/details' do
 	@group = Group.find(params[:id])
 	@posts = Post.where(group_id: @group.id)
@@ -125,6 +153,10 @@ end
 
 get '/events' do
 	@events = Event.where("event_date >= ?", Date.today).order(:event_date)
+	@page = Nokogiri::HTML(open("http://www.blogto.com/events/"))
+	@blog_to_links = @page.css('.event-name a').map{|a| [a.text.strip, a["href"]]}
+	@blog_to_summary = @page.css('.event-summary').map{|x| [x.text]}
+	@blog_to_events = @blog_to_links.zip(@blog_to_summary)
   erb :'/events/index'
 end
 
@@ -241,6 +273,10 @@ post '/admin/event' do
 	erb :'/admin/events/index'
 end 
 
+get '/admin/groups' do
+	erb :'/admin/groups/index'
+end
+
 #####>>>>>> Start of Admin Delete Group View
 
 post '/admin/groups/:id/deactivate' do
@@ -270,3 +306,4 @@ end
 
 
 
+>>>>>>> add_group
