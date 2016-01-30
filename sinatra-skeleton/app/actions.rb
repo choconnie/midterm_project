@@ -287,29 +287,30 @@ post '/admin/event' do
 	erb :'/admin/events/index'
 end 
 
-get '/admin/groups' do
-	erb :'/admin/groups/index'
-end
-
 #####>>>>>> Start of Admin Delete Group View
 
+get '/admin/groups' do
+  erb :'/admin/groups/index'
+end
+
 post '/admin/groups/:id/deactivate' do
-	@group = Group.find params[:id]
-	@group.update_attributes(status: false)
-	redirect '/admin/groups'
+  @group = Group.find params[:id]
+  @group.update_attributes(status: false)
+  redirect '/admin/groups'
 end
 
 post '/admin/groups/:id/activate' do
-	@group = Group.find params[:id]
-	@group.update_attributes(status: true)
-	redirect '/admin/groups'
+  @group = Group.find params[:id]
+  @group.update_attributes(status: true)
+  redirect '/admin/groups'
 end
 
 get '/admin/groups' do
-	@total_users = User.all.count
-	@total_groups = Group.all.count
-	@groups = Group.all
-	erb :'/admin/groups/index'
+  @total_users = User.all.count
+  @total_groups = Group.all.count
+  @groups = Group.all
+  erb :'/admin/groups/index'
 end
 
 #####>>>>>> End of Admin Delete Group View
+
