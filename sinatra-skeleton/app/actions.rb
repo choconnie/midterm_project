@@ -143,6 +143,20 @@ get '/groups/:id/posts/:id/details' do
   erb :'/groups/posts/details'
 end
 
+post '/groups/:id/post/create' do
+	@id = params[:id]
+	@new_post = Post.create(
+		group_id: params[:id],
+    title: params[:title],
+    content: params[:content]
+	)
+	tags = params[:tags].split
+	tags.each do |tag|
+		@new_post.add_tag(tag)
+	end
+	redirect "/groups/#{@id}/details"
+end
+
 #####>>>>>> End of Group View
 
 get '/events' do

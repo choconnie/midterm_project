@@ -8,8 +8,13 @@ class Post < ActiveRecord::Base
   validates :title, presence: true
 
   def add_tag(tag)
-  	tag = Tag.find_by(name: tag)
-  	self.post_tags.create(post_id: self.id, tag_id: tag.id)
+  	find_tag = Tag.find_by(name: tag)
+  	unless find_tag.nil?
+  		self.post_tags.create(post_id: self.id, tag_id: find_tag.id)
+		else 
+			new_tag = Tag.create(name: tag)
+			self.post_tags.create(post_id: self.id, tag_id: new_tag.id)
+		end
 	end
 
 end

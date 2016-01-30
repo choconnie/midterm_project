@@ -65,3 +65,7 @@
 .bt_header {
 	text-align: center;
 }
+
+.post_form * {
+	margin: .5em 0;
+}

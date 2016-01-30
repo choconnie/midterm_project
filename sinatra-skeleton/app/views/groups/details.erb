@@ -8,8 +8,23 @@
             <a href="/groups/<%= post.group_id%>/posts/<%= post.id %>/details"><%= post.title %></a>
             <%= limit_to_num_of_char(post.content, 100) %><br/>Created at: <%= post.created_at %>
           </p>
+          <p>
+          <% post.tags.each do |tag| %>
+            <%= tag.name %>
+          <% end %>
+          </p>
         </div>
       <% end %>
+
+      <h2>Add a New Post</h2>
+      
+      <form method="POST" action="/groups/<%= @group.id %>/post/create" role="form" class="post_form">
+        <input type = "text" class="form-control" name="title" placeholder="Title">
+        <textarea name="content" class="form-control" placeholder="Post details go here..."></textarea>
+        <input type ="text" name="tags" class="form-control" placeholder="Tags">
+        <input type = "submit" class="btn" value ="Sumbit!">
+      </form>
+      
       <a href="/groups">Back to group list</a>
     </div>
   </div>
