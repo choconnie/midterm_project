@@ -4,9 +4,9 @@ class AddTagsTable < ActiveRecord::Migration
   		t.string	:name
   	end
 
-  	create_table :posts_tags, id: false do |t|
-      t.belongs_to :tag, index: true
-      t.belongs_to :post, index: true
+  	create_table :post_tags, id: false do |t|
+      t.belongs_to :tag
+      t.belongs_to :post
     end
   end
 end

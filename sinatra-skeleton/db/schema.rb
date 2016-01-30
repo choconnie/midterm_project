@@ -11,7 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20160130025011) do
 
   create_table "announcements", force: :cascade do |t|
@@ -48,11 +47,8 @@ ActiveRecord::Schema.define(version: 20160130025011) do
     t.string   "city"
     t.datetime "created_at"
     t.datetime "updated_at"
-<<<<<<< HEAD
-    t.integer  "user_id"
-=======
     t.string   "description"
->>>>>>> test
+    t.integer  "user_id"
   end
 
   create_table "memberships", id: false, force: :cascade do |t|
@@ -71,6 +67,11 @@ ActiveRecord::Schema.define(version: 20160130025011) do
     t.integer "user_id"
   end
 
+  create_table "post_tags", id: false, force: :cascade do |t|
+    t.integer "tag_id"
+    t.integer "post_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.integer  "group_id"
     t.string   "title"
@@ -80,14 +81,6 @@ ActiveRecord::Schema.define(version: 20160130025011) do
   end
 
   add_index "posts", ["group_id"], name: "index_posts_on_group_id"
-
-  create_table "posts_tags", id: false, force: :cascade do |t|
-    t.integer "tag_id"
-    t.integer "post_id"
-  end
-
-  add_index "posts_tags", ["post_id"], name: "index_posts_tags_on_post_id"
-  add_index "posts_tags", ["tag_id"], name: "index_posts_tags_on_tag_id"
 
   create_table "services", force: :cascade do |t|
     t.string   "title"
