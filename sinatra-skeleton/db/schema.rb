@@ -11,7 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20160130190538) do
 
   create_table "announcements", force: :cascade do |t|
@@ -50,7 +49,7 @@ ActiveRecord::Schema.define(version: 20160130190538) do
     t.datetime "updated_at"
     t.string   "description"
     t.integer  "user_id"
-    t.boolean  "status",     default: false
+    t.boolean  "status",      default: false
   end
 
   create_table "memberships", id: false, force: :cascade do |t|
