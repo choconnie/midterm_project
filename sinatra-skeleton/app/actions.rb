@@ -43,7 +43,7 @@ end
 get '/user/:id/dashboard' do
 	@announcement = Announcement.last
 	@user = current_user
-	@memberships = Membership.where(user_id: @user.id)
+	@memberships = @user.groups
 	@events = Event.where("event_date >= ?", Date.today).order(:event_date).limit(3)
 	erb :'/user/dashboard'
 end
@@ -80,7 +80,10 @@ end
 
 # Find all groups with status == true
 get '/groups' do
+	@user = current_user
 	@groups = Group.where(status: true)
+	# @group_ids = @groups.map{|group| group.id}
+	@user_groups = @user.groups.map{|group| group.id}
 	erb :'groups/index'
 end
 
@@ -111,29 +114,19 @@ end
 # 	redirect '/groups'
 # end
 
-post '/groups/join/membership' do
+post '/groups/join/:id' do
 	@user = current_user
-	session[:group_id] = params[:group_id]
-	@group = Group.find(session[:group_id])
-
-  registered = Membership.where(user_id: @user.id).where(group_id: @group.id)
-  if !(registered.empty?)
- 	  session.delete(:group_id)
- 	  redirect '/groups'
-  else
-    @membership = Membership.new(
-      user_id: current_user.id,
-  	  group_id: params[:group_id]
-  	)
-  	@membership.save
-  	redirect "/groups/#{@group.id}/join"
-  end
+	@group = Group.find(params[:id])
+	@membership = Membership.create(
+    user_id: @user.id,
+	  group_id: @group.id
+	)
+  redirect "/groups/#{@group.id}/join"
 end
 
 # Link to see group details
 get '/groups/:id/join' do
-	@group = Group.find(session[:group_id])
-	session.delete(:group_id)
+	@group = Group.find(params[:id])
   erb :'/groups/join'
 end
 
@@ -233,6 +226,7 @@ end
 #####>>>>>> End of profile view
 
 get '/admin' do
+	@user = current_user
 	@total_users = User.all.count
 	@total_groups = Group.all.count
 	erb :'/admin/index'
@@ -262,6 +256,7 @@ post '/admin/users/:id/activate' do
 end
 
 get '/admin/users' do
+	@user = current_user
 	@total_users = User.all.count
 	@total_groups = Group.all.count
 	@users = User.all
@@ -269,6 +264,7 @@ get '/admin/users' do
 end
 
 get '/admin/events' do
+	@user = current_user
 	@total_users = User.all.count
 	@total_groups = Group.all.count
 	erb :'/admin/events/index'
@@ -303,6 +299,7 @@ post '/admin/groups/:id/activate' do
 end
 
 get '/admin/groups' do
+	@user = current_user
   @total_users = User.all.count
   @total_groups = Group.all.count
   @groups = Group.all

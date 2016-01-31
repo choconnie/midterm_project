@@ -8,28 +8,31 @@
       <br/><br/>
     </div> 
     <% @groups.each do |group| %>
-      <div class="col-sm-4">
-        <div class="panel panel-success">
-          <div class="panel-heading"><%= group.group_name %></div>
-          <div class="panel-body"><p><%= limit_to_num_of_char(group.description, 100)%></p></div>
-          <div class="panel-footer">
-            <form method="post" action="/groups/join/membership">
-              <input type="hidden" name="group_id" value="<%= group.id%>">
-              <input type="submit" class="btn btn-success btn-md" name="join" value="Join in!">
-            </form>
-          </div>
+    <div class="col-sm-4">
+      <div class="panel panel-success">
+        <div class="panel-heading"><%= group.group_name %></div>
+        <div class="panel-body"><p><%= limit_to_num_of_char(group.description, 100)%></p></div>
+        <div class="panel-footer">
+          <% unless @user_groups.include?(group.id) %>
+          <form method="post" action="/groups/join/<%= group.id%>">
+            <input type="submit" class="btn btn-success btn-md" name="join" value="Join in!">
+          </form>
+          <% else %>
+          <a href = "/groups/<%=group.id %>/details" class="btn">View Posts</a>
+          <% end %>
         </div>
       </div>
+    </div>
+    <hr>
+    <% end %>
   </div>
-
-  <hr>
-<% end %>
+</div>
 
 <div class="form-group">
   <div class="col-sm-0">
     <a href="/groups/new"><p>Click Here to Add new Group</p></a>
     <!-- <input class="btn btn-small btn-danger" name="Delete_Group" value="Delete Group" type="submit"> -->
-  <hr/>
+    <hr/>
 <!--   <div class="form-group">
     <div class="col-sm-0">
       <a href="/groups/new"><input class="btn btn-small btn-success" name="Add_Group" value="Add New Group" type="button"></a>

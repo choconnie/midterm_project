@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20160130190538) do
     t.boolean  "status",      default: false
   end
 
-  create_table "memberships", id: false, force: :cascade do |t|
+  create_table "memberships", force: :cascade do |t|
     t.integer "user_id"
     t.integer "group_id"
   end
