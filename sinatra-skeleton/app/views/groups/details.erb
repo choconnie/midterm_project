@@ -41,7 +41,7 @@
       <a href="/groups">Back to group list</a>
     </div>
     <div class="col-sm-2 tag_list">
-      <h4>Tags</h4>
+      <h4>Post Tags</h4>
         <% @tags.each do |tag| %>
           <p class="tag"><a href="/groups/<%=@group.id%>/posts/<%=tag%>"><%= tag%></a></p>
         <% end %>

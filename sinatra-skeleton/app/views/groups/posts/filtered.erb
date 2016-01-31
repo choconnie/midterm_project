@@ -32,7 +32,7 @@
       <a href="/groups/<%=@group.id%>/details">Back to group home</a>
     </div>
     <div class="col-sm-2 tag_list">
-      <h4>Tags</h4>
+      <h4>Post Tags</h4>
         <% @tags.each do |tag| %>
           <p class="tag"><a href="/groups/<%=@group.id%>/posts/<%=tag%>"><%= tag%></a></p>
         <% end %>
