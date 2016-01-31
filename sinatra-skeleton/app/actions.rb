@@ -83,7 +83,6 @@ get '/groups' do
 	@groups = Group.where(status: true)
 	# @group_ids = @groups.map{|group| group.id}
 	@user_groups = @user.groups.map{|group| group.id}
-	binding.pry
 	erb :'groups/index'
 end
 
