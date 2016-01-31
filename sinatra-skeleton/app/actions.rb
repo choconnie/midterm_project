@@ -275,10 +275,6 @@ end
 
 #####>>>>>> Start of Admin Delete Group View
 
-get '/admin/groups' do
-  erb :'/admin/groups/index'
-end
-
 post '/admin/groups/:id/deactivate' do
   @group = Group.find params[:id]
   @group.update_attributes(status: false)
