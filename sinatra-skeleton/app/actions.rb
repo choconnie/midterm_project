@@ -226,6 +226,7 @@ end
 #####>>>>>> End of profile view
 
 get '/admin' do
+	@user = current_user
 	@total_users = User.all.count
 	@total_groups = Group.all.count
 	erb :'/admin/index'
@@ -255,6 +256,7 @@ post '/admin/users/:id/activate' do
 end
 
 get '/admin/users' do
+	@user = current_user
 	@total_users = User.all.count
 	@total_groups = Group.all.count
 	@users = User.all
@@ -262,6 +264,7 @@ get '/admin/users' do
 end
 
 get '/admin/events' do
+	@user = current_user
 	@total_users = User.all.count
 	@total_groups = Group.all.count
 	erb :'/admin/events/index'
@@ -296,6 +299,7 @@ post '/admin/groups/:id/activate' do
 end
 
 get '/admin/groups' do
+	@user = current_user
   @total_users = User.all.count
   @total_groups = Group.all.count
   @groups = Group.all
