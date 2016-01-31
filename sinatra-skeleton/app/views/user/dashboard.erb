@@ -1,41 +1,75 @@
-<div class="dashboard">
-	<div class="row">
-		<div class="col-md-3">
-			<div class="announcement">
-				<h3>Announcements</h3>
-				<h4><%= @announcement.title%></h4>
-				<p><%= @announcement.content%></p>
-				<p><%= @announcement.created_at %>
-			</div>
-			<a class="twitter-timeline" href="https://twitter.com/ISCCanada" data-widget-id="692762832819982336">Tweets by @ISCCanada</a>
-		</div>
-		<div class="col-md-5">
-			<h2>Updates From Your Groups</h2>
-			<% if @memberships.present? %>
-				<% @memberships.each do |membership| %>
-				<% if membership.group.posts.exists? %>
-				<div class="group-message">
-					<h3><a href="#"><%= membership.group.group_name %></a></h3>
-					<h4><a href="#"><%= membership.group.posts.last.title %></a></h4>
-					<p><%= membership.group.posts.last.content %></p>
-				</div>
-				<% end %>
-				<% end %>
-			<% else %>
-				<p>Please join a group if you haven't already!</p>
-			<%end %>
-		</div>
-		<div class="col-md-4">
-			<h3> What's Happening in Toronto </h3>
-			<% @events.each do |event| %>
-				<div class="event">
-					<h4><%= event.title %></h4>
-					<p><%= event.event_date %></p>
-					<p><%= event.details %></p>
-					<a href="#">See More</a>
-				</div>
-			<% end %>
-			<script></script>
-		</div>
-	</div>
+<!--     <!-- Page Content -->
+    <div class="container">
+
+        <!-- Membership Feed -->
+        <div class="row">
+            <div class="col-md-8">
+                <div class="col-md-5">
+					      <h2>Updates From Your Groups</h2>
+						      <% if @memberships.present? %>
+						        <% @memberships.each do |membership| %>
+						          <% if membership.group.posts.exists? %>
+						          <div class="group-message">
+						            <h3><a href="#"><%= membership.group.group_name %></a></h3>
+						            <h4><a href="#"><%= membership.group.posts.last.title %></a></h4>
+						            <p><%= membership.group.posts.last.content %></p>
+						          </div>
+						          <% end %>
+						        <% end %>
+						      <% else %>
+						        <p>Please join a group if you haven't already!</p>
+						      <%end %>
+    					</div>
+            </div>
+            <div class="col-md-4">
+                <a class="twitter-timeline" href="https://twitter.com/ISCCanada" data-widget-id="692762832819982336">Tweets by @ISCCanada</a>
+            </div>
+        </div>
+        <hr>
+        <!-- Announcements Feed -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="well text-center">
+					        <h3>Announcements</h3>
+					        <h4><%= @announcement.title%></h4>
+					        <p><%= @announcement.content%></p>
+					        <p><%= @announcement.created_at %>
+					      </div>
+            </div>
+        </div>
+
+        <!-- Events Feed -->
+
+    <div class="row" ng-repeat="event in events" ng-if="$index % 3 == 0">
+        <div class="col-md-4">
+            <p><%= @events[0].title%></p>
+            <p><%= @events[0].details%></p>
+            <p><span class="badge"><%= @events[0].event_date%></span></p>
+            
+        </div>
+        <div class="col-md-4">
+            <p ng-if="events[$index + 1].title != null">
+            <p><%= @events[1].title%></p>
+            <p><%= @events[1].details%></p>
+            <p><span class="badge"><%= @events[1].event_date%></span></p>
+        </div>
+        <div class="col-md-4">
+            <p ng-if="events[$index + 1].title != null">
+            <p><%= @events[2].title%></p>
+            <p><%= @events[2].details%></p>
+            <p><span class="badge"><%= @events[2].event_date%></span></p>
+        </div>
+    </div>
 </div>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+
+
+
