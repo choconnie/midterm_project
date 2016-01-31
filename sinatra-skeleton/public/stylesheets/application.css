@@ -69,3 +69,15 @@
 .post_form * {
 	margin: .5em 0;
 }
+
+.tag {
+	margin: 0;
+	padding: 0;
+}
+
+.tag_list {
+	border: 0.1em solid #d7d7d7;
+	border-radius: 5px;
+	text-align: center;
+	padding: 0.5em 1em;
+}

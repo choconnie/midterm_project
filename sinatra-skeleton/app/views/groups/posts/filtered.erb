@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm-12">
       <hr/>
-      <h1 style="text-align: center">Post List</h1>
+      <h1 style="text-align: center">Posts About <%=@tag.name%></h1>
       <hr/>
     </div>
   </div>
@@ -12,7 +12,7 @@
         <button type="button" class="btn btn-primary btn-sm" name="join">Add New Post</button>
       </a> -->
       <br/><br/>
-      <% @posts.each do |post| %>
+      <% @filtered_posts.each do |post| %>
         <div class="post">
           <p>
             <a href="/groups/<%= post.group_id%>/posts/<%= post.id %>/details"><%= post.title %></a>
@@ -21,7 +21,6 @@
             <br/>
           </p>
           <p>
-          Tags:
           <% post.tags.each do |tag| %>
             <a href="/groups/<%=@group.id%>/posts/<%= tag.name %>"><%= tag.name %></a>
           <% end %>
@@ -29,16 +28,8 @@
         </div>
       <% end %>
 
-      <h2>Add a New Post</h2>
-      
-      <form method="POST" action="/groups/<%= @group.id %>/post/create" role="form" class="post_form">
-        <input type = "text" class="form-control" name="title" placeholder="Title">
-        <textarea name="content" class="form-control" placeholder="Post details go here..."></textarea>
-        <input type ="text" name="tags" class="form-control" placeholder="Tags">
-        <input type = "submit" class="btn" value ="Sumbit!">
-      </form>
       <br/><br/><hr/>
-      <a href="/groups">Back to group list</a>
+      <a href="/groups/<%=@group.id%>/details">Back to group home</a>
     </div>
     <div class="col-sm-2 tag_list">
       <h4>Tags</h4>

@@ -10,6 +10,19 @@ helpers do
 		User.find(session[:user_id]) if session[:user_id]
 	end
 
+	def get_post_details
+		@group = Group.find(params[:id])
+		@posts = Post.where(group_id: @group.id)
+		@tags = []
+		@posts.each do |post|
+			tags = post.tags
+			tags.each do |tag|
+				@tags.push tag.name 
+			end
+		end
+		@tags = @tags.uniq
+	end
+
 end
 
 get '/' do
@@ -131,9 +144,20 @@ get '/groups/:id/join' do
 end
 
 get '/groups/:id/details' do
-	@group = Group.find(params[:id])
-	@posts = Post.where(group_id: @group.id)
+	get_post_details
   erb :'/groups/details'
+end
+
+get '/groups/:id/posts/:tag' do
+	get_post_details
+	@tag = Tag.find_by(name: params[:tag])
+	@filtered_posts = []
+	@posts.each do |post|
+ 		if post.tags.include?(@tag) 
+    	@filtered_posts.push post      
+  	end
+	end
+  erb :'/groups/posts/filtered'
 end
 
 # Link to Group Post details
