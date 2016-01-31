@@ -43,6 +43,7 @@ post '/user/login' do
 			erb :'/user/login'
 		elsif (@user.password == password) && @user.status == true
 			session[:user_id] = @user.id
+      session.delete(:show_group_page_error)
 			redirect "/user/#{@user.id}/dashboard"
 		elsif @user
 			@user.status_check
@@ -62,7 +63,8 @@ get '/user/:id/dashboard' do
 end
 
 get '/user/sign_out' do
-	session[:user_id] = nil
+	#session[:user_id] = nil
+  session.delete(:user_id)
 	redirect '/'
 end
 
@@ -95,9 +97,14 @@ end
 get '/groups' do
 	@user = current_user
 	@groups = Group.where(status: true)
+  if session[:user_id]
 	# @group_ids = @groups.map{|group| group.id}
 	@user_groups = @user.groups.map{|group| group.id}
 	erb :'groups/index'
+  else
+    session[:show_group_page_error] = "Please login first and Join our group! :)"
+    redirect '/'
+  end
 end
 
 # Form to Add new group
