@@ -78,6 +78,7 @@ end
 #   erb :'groups/index'
 # end
 
+# Find all groups with status == true
 get '/groups' do
 	@groups = Group.where(status: true)
 	erb :'groups/index'
