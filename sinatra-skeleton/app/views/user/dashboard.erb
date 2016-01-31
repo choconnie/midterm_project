@@ -1,26 +1,25 @@
-<!--     <!-- Page Content -->
+    <!-- Page Content -->
     <div class="container">
-
         <!-- Membership Feed -->
         <div class="row">
-            <div class="col-md-8">
-                <div class="col-md-5">
+            <div class="text-center">
+                <div class="col-md-8">
 					      <h2>Updates From Your Groups</h2>
-						      <% if @memberships.present? %>
-										<% @memberships.each do |group| %>
-										<% if group.posts.exists? %>
-										<div class="group-message">
-											<h3><a href="#"><%= group.group_name %></a></h3>
-											<h4><a href="#"><%= group.posts.last.title %></a></h4>
-											<p><%= group.posts.last.content %></p>
-										</div>
-										<% end %>
-										<% end %>
-									<% else %>
-										<p>Please join a group if you haven't already!</p>
-									<%end %>
+					        <% if @memberships.present? %>
+								<% @memberships.each do |group| %>
+    								<% if group.posts.exists? %>
+    								    <div class="group-message">
+    									<h3><%= group.group_name %></h3>
+    									<h4><a href="/groups/<%=group.id%>/details"><%= group.posts.last.title %></a></h4>
+    									<p><%= group.posts.last.content %></p>
+    								    </div>
+    								<% end %>
+							     <% end %>
+							<% else %>
+								<p>Please join a group if you haven't already!</p>
+							<%end %>
     					</div>
-            </div>
+                </div>
             <div class="col-md-4">
                 <a class="twitter-timeline" href="https://twitter.com/ISCCanada" data-widget-id="692762832819982336">Tweets by @ISCCanada</a>
             </div>
@@ -42,20 +41,20 @@
 
     <div class="row" ng-repeat="event in events" ng-if="$index % 3 == 0">
         <div class="col-md-4">
-            <p><%= @events[0].title%></p>
+            <p><a href="/event/@events[0]/details"><%= @events[0].title%></a></p>
             <p><%= @events[0].details%></p>
             <p><span class="badge"><%= @events[0].event_date%></span></p>
             
         </div>
         <div class="col-md-4">
             <p ng-if="events[$index + 1].title != null">
-            <p><%= @events[1].title%></p>
+            <p><a href="/event/@events[1]/details"><%= @events[1].title%></a></p>
             <p><%= @events[1].details%></p>
             <p><span class="badge"><%= @events[1].event_date%></span></p>
         </div>
         <div class="col-md-4">
             <p ng-if="events[$index + 1].title != null">
-            <p><%= @events[2].title%></p>
+            <p><a href="/event/@events[2]/details"><%= @events[2].title%></a></p>
             <p><%= @events[2].details%></p>
             <p><span class="badge"><%= @events[2].event_date%></span></p>
         </div>

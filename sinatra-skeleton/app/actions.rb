@@ -310,25 +310,33 @@ end
 
 #####>>>>>> Start of Admin Delete Group View
 
-post '/admin/groups/:id/deactivate' do
-  @group = Group.find params[:id]
-  @group.update_attributes(status: false)
-  redirect '/admin/groups'
-end
-
-post '/admin/groups/:id/activate' do
-  @group = Group.find params[:id]
-  @group.update_attributes(status: true)
-  redirect '/admin/groups'
-end
-
+# Go to admin/groups page and list
+# all the groups added
 get '/admin/groups' do
-	@user = current_user
+  @user = current_user
   @total_users = User.all.count
   @total_groups = Group.all.count
   @groups = Group.all
   erb :'/admin/groups/index'
 end
 
+# Deactivate Group 
+post '/admin/groups/:id/deactivate' do
+  @group = Group.find params[:id]
+  @group.update_attributes(status: false)
+  redirect '/admin/groups'
+end
+
+# Activate Group
+post '/admin/groups/:id/activate' do
+  @group = Group.find params[:id]
+  @group.update_attributes(status: true)
+  redirect '/admin/groups'
+end
+
 #####>>>>>> End of Admin Delete Group View
+#####>>>>>>
+#####>>>>>> Start of Email Contact View
+
+#####>>>>>> End of Email Contact View
 
