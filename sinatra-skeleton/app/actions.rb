@@ -110,7 +110,6 @@ end
 # 	redirect '/groups'
 # end
 
-# Link to see group details
 post '/groups/join/membership' do
 	@user = current_user
 	session[:group_id] = params[:group_id]
@@ -130,6 +129,7 @@ post '/groups/join/membership' do
   end
 end
 
+# Link to see group details
 get '/groups/:id/join' do
 	@group = Group.find(session[:group_id])
 	session.delete(:group_id)
