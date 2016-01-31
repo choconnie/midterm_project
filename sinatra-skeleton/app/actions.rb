@@ -203,7 +203,7 @@ get '/services' do
 end
 
 get '/services/:id/details' do
-	@service = Service.find(params[:id])
+	@service = Service.find params[:id]
   erb :'/services/details'
 end
 
