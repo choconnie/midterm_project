@@ -1,6 +1,7 @@
     <!-- Page Content -->
     <div class="container">
         <!-- Membership Feed -->
+        <br>
         <div class="row">
             <div class="text-center">
                 <div class="col-md-8">
@@ -20,8 +21,13 @@
 							<%end %>
     					</div>
                 </div>
-            <div class="col-md-4">
-                <a class="twitter-timeline" href="https://twitter.com/ISCCanada" data-widget-id="692762832819982336">Tweets by @ISCCanada</a>
+                <br><br>
+            <div class="col-md-4 wb-twitter">
+                <a class="twitter-timeline" 
+                   width="300"
+                   height="500"
+                   href="https://twitter.com/ISCCanada" 
+                   data-widget-id="692762832819982336">Tweets by @ISCCanada</a>
             </div>
         </div>
         <hr>
@@ -41,20 +47,20 @@
 
     <div class="row" ng-repeat="event in events" ng-if="$index % 3 == 0">
         <div class="col-md-4">
-            <p><a href="/event/@events[0]/details"><%= @events[0].title%></a></p>
+            <p><a href="/event/<%= @events[0].id%>/details"><%= @events[0].title%></a></p>
             <p><%= @events[0].details%></p>
             <p><span class="badge"><%= @events[0].event_date%></span></p>
             
         </div>
         <div class="col-md-4">
             <p ng-if="events[$index + 1].title != null">
-            <p><a href="/event/@events[1]/details"><%= @events[1].title%></a></p>
+            <p><a href="/event/<%= @events[1].id%>/details"><%= @events[1].title%></a></p>
             <p><%= @events[1].details%></p>
             <p><span class="badge"><%= @events[1].event_date%></span></p>
         </div>
         <div class="col-md-4">
             <p ng-if="events[$index + 1].title != null">
-            <p><a href="/event/@events[2]/details"><%= @events[2].title%></a></p>
+            <p><a href="/event/<%= @events[2].id%>/details"><%= @events[2].title%></a></p>
             <p><%= @events[2].details%></p>
             <p><span class="badge"><%= @events[2].event_date%></span></p>
         </div>
