@@ -15,8 +15,8 @@
 				<% @memberships.each do |group| %>
 				<% if group.posts.exists? %>
 				<div class="group-message">
-					<h3><a href="#"><%= group.group_name %></a></h3>
-					<h4><a href="#"><%= group.posts.last.title %></a></h4>
+					<h3><a href="/groups/<%=group.id%>/details"><%= group.group_name %></a></h3>
+					<h4><a href="/groups/<%=group.id%>/posts/<%=group.posts.last.id%>/details"><%= group.posts.last.title %></a></h4>
 					<p><%= group.posts.last.content %></p>
 				</div>
 				<% end %>
@@ -32,7 +32,7 @@
 					<h4><%= event.title %></h4>
 					<p><%= event.event_date %></p>
 					<p><%= event.details %></p>
-					<a href="#">See More</a>
+					<a href="/event/<%= event.id %>/details">See More</a>
 				</div>
 			<% end %>
 			<script></script>
