@@ -338,5 +338,59 @@ end
 #####>>>>>>
 #####>>>>>> Start of Email Contact View
 
+post '/contact/index' do
+  erb :'/contacts/index'
+end
+
+# get '/' do
+#   erb :'/index'
+# end
+
+# get '/contact' do
+#   erb :'/index'
+# end
+
+# get '/thankyou' do
+#   Pony.email(to: "isc.canada@gmail.com",
+#    from: params[:email],
+#    subject: "You got a new message from #{params[:name]}",
+#    :message => params[:message],
+#    :via => :smtp,
+#    :via_options => {
+#    :address        => 'smtp.gmail.com',
+#    :port           => '587',
+#    :user_name      => 'isc.canada',
+#    :password       => 'midterm16',
+#    :authentication => :plain, # :plain, :login, :cram_md5, no auth by default
+#    :domain         => "http://localhost:3000/" # the HELO domain provided by the client to the server
+#     }
+#   )
+#   "Thank you #{params[:name]} for contacting us"
+# end
+
+# get '/contact/index' do
+#   erb :'/contacts/index'
+# end
+
+# post '/contact/index' do 
+# Pony.mail(
+#   name:    params[:name],
+#   email:   params[:email],
+#   message: params[:message],
+#   to:      'isc.canada@gmail.com',
+#   port:    '587',
+#   via:     :smtp,
+#   via_options: { 
+#     address:              'smtp.gmail.com', 
+#     port:                 '587', 
+#     enable_starttls_auto: :true, 
+#     user_name:            'isc.canada@gmail.com', 
+#     password:             'midterm16', 
+#     authentication:       :plain, 
+#     domain:               'localhost.localdomain'
+#   })
+#   redirect '/contacts/index' 
+# end
+
 #####>>>>>> End of Email Contact View
 
