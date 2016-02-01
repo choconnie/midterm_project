@@ -10,8 +10,8 @@
 								<% @memberships.each do |group| %>
     								<% if group.posts.exists? %>
     								    <div class="group-message">
-    									<h3><%= group.group_name %></h3>
-    									<h4><a href="/groups/<%=group.id%>/details"><%= group.posts.last.title %></a></h4>
+    									<h3><a href="/groups/<%=group.id%>/details"><%= group.group_name %></a></h3>
+    									<h4><%= group.posts.last.title %></h4>
     									<p><%= group.posts.last.content %></p>
     								    </div>
     								<% end %>
