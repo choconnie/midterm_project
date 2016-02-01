@@ -257,12 +257,14 @@ end
 
 get '/admin' do
 	@user = current_user
+	binding.pry
 	@total_users = User.all.count
 	@total_groups = Group.all.count
 	erb :'/admin/index'
 end
 
 post '/admin/announcement' do
+	@user = current_user
 	@announcement = Announcement.new(
 		title: params[:title],
 		content: params[:content]
@@ -301,6 +303,7 @@ get '/admin/events' do
 end
 
 post '/admin/event' do
+	@user = current_user
 	@event = Event.new(
 		title: params[:title],
 		event_date: params[:date],
