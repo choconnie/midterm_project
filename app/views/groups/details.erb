@@ -17,14 +17,13 @@
           <p>
             <a href="/groups/<%= post.group_id%>/posts/<%= post.id %>/details"><%= post.title %></a>
             <%= limit_to_num_of_char(post.content, 100) %>
+            <p>Tags:
+            <% post.tags.each do |tag| %>
+              <a href="/groups/<%=@group.id%>/posts/<%= tag.name %>"><%= tag.name %></a>
+              <% end %>
             <br/>Created at: <%= post.created_at %>
             <br/>
           </p>
-          <p>
-          Tags:
-          <% post.tags.each do |tag| %>
-            <a href="/groups/<%=@group.id%>/posts/<%= tag.name %>"><%= tag.name %></a>
-          <% end %>
           </p>
         </div>
       <% end %>

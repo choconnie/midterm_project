@@ -23,6 +23,18 @@ helpers do
 		@tags = @tags.uniq
 	end
 
+	def get_service_details
+		@services = Service.all
+		@tags = []
+		@services.each do |service|
+				tags = service.tags
+				tags.each do |tag|
+					@tags.push tag.name 
+				end
+			end
+		@tags = @tags.uniq
+	end
+
 end
 
 get '/' do
@@ -204,8 +216,20 @@ get '/event/:id/details' do
 end
 
 get '/services' do
-	@services = Service.all
+	get_service_details
   erb :'/services/index'
+end
+
+get '/services/filtered/:name' do
+	get_service_details
+	@tag = Tag.find_by(name: params[:name])
+	@filtered_services = []
+	@services.each do |service|
+ 		if service.tags.include?(@tag) 
+    	@filtered_services.push service      
+  	end
+	end
+  erb :'/services/filtered'
 end
 
 get '/services/:id/details' do

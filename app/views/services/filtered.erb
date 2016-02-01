@@ -13,7 +13,7 @@
 
   <div class="row">
     <div class="col-sm-7 col-sm-offset-1">
-      <% @services.each do |each_service| %>
+      <% @filtered_services.each do |each_service| %>
         <div class="panel panel-success">
           <div class="panel-heading">
             <%= each_service.title %>
@@ -26,6 +26,7 @@
               <% end %>
             </p>
           </div>
+
           <div class="panel-footer">
             <a href = "/services/<%= each_service.id%>/details" class="btn">View more details</a>
           </div>
@@ -42,7 +43,7 @@
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
       <br><hr>
-      <a href="/">Back to home</a>
+      <a href="/services">Back to Services home</a>
     </div>
   </div>
 
