@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <br/>
+      <h1 style="text-align:center">Group List</h1>
+      <br/>
+      <h4 style="text-align:center">A mind is like a parachute. It doesn't work if it isn't open.<br/>Join Groups!</h4>
+      <br/><br/>
+    </div> 
+    <% @groups.each do |group| %>
+    <div class="col-sm-4">
+      <div class="panel panel-success">
+        <div class="panel-heading"><%= group.group_name %></div>
+        <div class="panel-body"><p><%= limit_to_num_of_char(group.description, 100)%></p></div>
+        <div class="panel-footer">
+          <% unless @user_groups.include?(group.id) %>
+          <form method="post" action="/groups/join/<%= group.id%>">
+            <input type="submit" class="btn btn-success btn-md" name="join" value="Join in!">
+          </form>
+          <% else %>
+          <a href = "/groups/<%=group.id %>/details" class="btn">View Posts</a>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+<hr>
+<div class="form-group">
+  <div class="col-sm-4">
+    <a href="/groups/new"><p>Click Here to Add new Group</p></a>
+  </div>
+</div>

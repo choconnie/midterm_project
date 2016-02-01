@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <h1>Title: <%= @post.title%></h1>
+
+      <h4>Created at: <%= @post.created_at%></h4>
+
+      <h2>Content</h2>
+      <p><%= @post.content%></p>
+      <p>Tags:
+        <% @post.tags.each do |tag| %>
+          <a href="/groups/<%=@group.id%>/posts/<%= tag.name %>"><%= tag.name %></a>
+        <% end %>
+      </p>
+      <a href="/groups/<%= @post.group_id%>/details">Back to post list</a>
+
+      <br/><br/><br/>
+
+      <h2>Comments</h2>
+      <form role="form" method="post" action="/create_new_comment">
+        <div class="form-group">
+          <label for="comment">Write a comment:</label>
+          <textarea class="form-control" rows="5" id="comment" placeholder="Comment here"></textarea>
+          <br/>
+          <input class="btn btn-small btn-success" name="Submit" value="Submit" type="submit">
+        </div>
+      </form>
+
+
+      <% @comments.each do |comment| %>
+        <div class="comment">
+
+          <h3><%= comment.content %></h3>
+          <p>Created at: <%= comment.created_at%></p>
+
+        </div>
+      <% end %>
+      <hr/>
+      <a href="/groups/<%= @post.group_id%>/details">Back to post list</a>
+
+    </div>
+  </div>
+</div>
