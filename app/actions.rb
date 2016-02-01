@@ -281,7 +281,6 @@ end
 
 get '/admin' do
 	@user = current_user
-	binding.pry
 	@total_users = User.all.count
 	@total_groups = Group.all.count
 	erb :'/admin/index'
@@ -341,6 +340,30 @@ post '/admin/event' do
 	erb :'/admin/events/index'
 end 
 
+get '/admin/services' do
+	@user = current_user
+	erb :'/admin/services/index'
+end
+
+post '/admin/services' do
+	@user = current_user
+	@service = Service.new(
+		title: params[:title],
+    content: params[:content],
+    email: params[:email],
+    phone: params[:phone]
+  )
+  if @service.save
+  	@success = true
+  	unless params[:tags].empty?
+	  	tags = params[:tags].split
+	  	tags.each do |tag|
+	  		@service.add_tag(tag)
+	  	end
+  	end
+	end
+  erb :'/admin/services/index'
+end
 #####>>>>>> Start of Admin Delete Group View
 
 # Go to admin/groups page and list
