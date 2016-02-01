@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :memberships
 
   validates :username, presence: true
-  validates :password, length: { minimum: 6 }
+  validates :password_digest, presence: true
   validates :email, presence: true
 
   def status_check
