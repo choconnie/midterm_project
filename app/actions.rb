@@ -179,8 +179,9 @@ get '/groups/:id/posts/:tag' do
 end
 
 # Link to Group Post details
-get '/groups/:id/posts/:id/details' do
-	@post = Post.find(params[:id])
+get '/groups/:group_id/posts/:post_id/details' do
+	@group = Group.find params[:group_id]
+	@post = Post.find(params[:post_id])
 	@comments = Comment.where(post_id: @post.id)
   erb :'/groups/posts/details'
 end
