@@ -29,6 +29,14 @@ ActiveRecord::Schema.define(version: 20160201013201) do
 
   add_index "comments", ["post_id"], name: "index_comments_on_post_id"
 
+  create_table "contacts", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "events", force: :cascade do |t|
     t.integer  "post_id"
     t.string   "title"
