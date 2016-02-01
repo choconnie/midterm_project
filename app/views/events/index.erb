@@ -7,10 +7,12 @@
 					<h2><%= event.title %></h2><p><%= event.event_date %></p>
 				</div>
 				<div id="<%=event.id%>" class="collapse">
+					<div class="event_dropdown">
 					<p><%= event.location %></p>
 					<p><%= event.url %></p>
 					<p><%= event.created_at %></p>
 					<p><a href="/event/<%= event.id %>/details">View More Details</a></p>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -42,29 +42,18 @@
 					      </div>
             </div>
         </div>
+    <% if @events %>
+    <div class="row">
+    <% @events.each do |event| %>
+        <div class="col-md-4">
+            <p><a href="/event/<%=event.id%>/details"><%=event.title%></a></p>
+            <p><%= event.details%></p>
+            <p><span class="badge"><%= event.event_date%></span></p>
+        </div>
 
-        <!-- Events Feed -->
-
-    <div class="row" ng-repeat="event in events" ng-if="$index % 3 == 0">
-        <div class="col-md-4">
-            <p><a href="/event/<%= @events[0].id%>/details"><%= @events[0].title%></a></p>
-            <p><%= @events[0].details%></p>
-            <p><span class="badge"><%= @events[0].event_date%></span></p>
-            
-        </div>
-        <div class="col-md-4">
-            <p ng-if="events[$index + 1].title != null">
-            <p><a href="/event/<%= @events[1].id%>/details"><%= @events[1].title%></a></p>
-            <p><%= @events[1].details%></p>
-            <p><span class="badge"><%= @events[1].event_date%></span></p>
-        </div>
-        <div class="col-md-4">
-            <p ng-if="events[$index + 1].title != null">
-            <p><a href="/event/<%= @events[2].id%>/details"><%= @events[2].title%></a></p>
-            <p><%= @events[2].details%></p>
-            <p><span class="badge"><%= @events[2].event_date%></span></p>
-        </div>
+    <% end %>
     </div>
+    <% end %>
 </div>
 
     <!-- jQuery -->
