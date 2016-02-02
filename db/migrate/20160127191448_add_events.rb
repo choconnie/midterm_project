@@ -3,7 +3,7 @@ class AddEvents < ActiveRecord::Migration
     create_table :events do |t|
       t.references :post, index: true
       t.string :title
-      t.date :event_date
+      t.datetime :event_date
       t.string :location
       t.string :url
       t.timestamps null: true
