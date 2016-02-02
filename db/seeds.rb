@@ -1,5 +1,11 @@
 require 'faker'
 
+
+Dir[APP_ROOT.join('app', 'models', '*.rb')].each do |model_file|
+    filename = File.basename(model_file).gsub('.rb', '')
+    autoload ActiveSupport::Inflector.camelize(filename), model_file
+end
+
 # If you are using 'rake db:rollback', then be careful.
 # Once you create data, comments all out.
 # Or
