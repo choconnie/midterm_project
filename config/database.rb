@@ -7,7 +7,10 @@ configure do
   set :database, {
     adapter: "sqlite3",
     database: "db/db.sqlite3"
-  }
+  } 
+  else
+    set :database, ENV['postgres://sbjlqagqrcjfpm:ckAnxPSIiWnwtT71nloEkBk3bV@ec2-54-235-152-114.compute-1.amazonaws.com:5432/dfnk5l9ejko6jh']
+  end
 
   # Load all models from app/models, using autoload instead of require
   # See http://www.rubyinside.com/ruby-techniques-revealed-autoload-1652.html
