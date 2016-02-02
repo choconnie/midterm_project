@@ -20,3 +20,7 @@ end
 
 gem 'faker'
 gem 'pony'
+
+group :production do
+  gem 'pg'
+end
