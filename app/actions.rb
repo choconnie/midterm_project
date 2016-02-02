@@ -182,8 +182,21 @@ end
 get '/groups/:group_id/posts/:post_id/details' do
 	@group = Group.find params[:group_id]
 	@post = Post.find(params[:post_id])
-	@comments = Comment.where(post_id: @post.id)
+	@comments = Comment.where(post_id: params[:post_id])
   erb :'/groups/posts/details'
+end
+
+post '/groups/:group_id/posts/:post_id/comment' do
+	@group = Group.find params[:group_id]
+	@post = Post.find params[:post_id] 
+	@user = current_user
+	@comment = Comment.new(
+		content: params[:content],
+		post_id: @post.id
+		)
+	@comment.save
+	@comments = Comment.where(post_id: params[:post_id])
+	erb :'/groups/posts/details'
 end
 
 post '/groups/:id/post/create' do

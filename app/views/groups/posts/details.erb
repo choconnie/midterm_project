@@ -12,21 +12,8 @@
           <a href="/groups/<%=@group.id%>/posts/<%= tag.name %>"><%= tag.name %></a>
         <% end %>
       </p>
-      <a href="/groups/<%= @post.group_id%>/details">Back to post list</a>
-
-      <br/><br/><br/>
-
-      <h2>Comments</h2>
-      <form role="form" method="post" action="/create_new_comment">
-        <div class="form-group">
-          <label for="comment">Write a comment:</label>
-          <textarea class="form-control" rows="5" id="comment" placeholder="Comment here"></textarea>
-          <br/>
-          <input class="btn btn-small btn-success" name="Submit" value="Submit" type="submit">
-        </div>
-      </form>
-
-
+      
+      <h2>Comments</h2> 
       <% @comments.each do |comment| %>
         <div class="comment">
 
@@ -35,6 +22,21 @@
 
         </div>
       <% end %>
+
+     <a href="/groups/<%= @post.group_id%>/details">Back to post list</a>
+
+      <br/><br/><br/>
+
+      
+      <form role="form" method="POST" action="/groups/<%=@group.id%>/posts/<%=@post.id%>/comment">
+        <div class="form-group">
+          <label for="comment">Write a comment:</label>
+          <textarea name="content" class="form-control" rows="5" id="comment" placeholder="Comment here"></textarea>
+          <br/>
+          <input class="btn btn-small btn-success" name="Submit" value="Submit" type="submit">
+        </div>
+      </form>
+
       <hr/>
       <a href="/groups/<%= @post.group_id%>/details">Back to post list</a>
 
