@@ -11,7 +11,7 @@ We created this project as part of Lighthouse Labs' web development bootcamp. As
 Stack
 =======
 
-This project was writing in Ruby with the Sinatra framework.
+This project was written in Ruby with the Sinatra framework.
 
 Installation
 ==============
